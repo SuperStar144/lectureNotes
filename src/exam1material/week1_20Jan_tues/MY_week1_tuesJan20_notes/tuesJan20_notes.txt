@@ -1,0 +1,356 @@
+CIS 301. Logical Foundations of Programming.
+
+Julie Thornton.
+
+What is this class?
+- logical reasoning (basics, puzzles)
+- writing formal statements (propositional and predicate logic)
+- proofs (why?)
+- reasoning about code
+    - analyzing what we know
+    - identifying equivalent programs
+    - simplifying programs
+    - formally describing what programs do
+- basics of proving correctness of programs (why?)
+
+
+Syllabus
+
+Canvas setup - weekly class material
+
+Ed Discussion
+
+How to take notes
+
+Attendance/practice quizzes
+
+
+///////////////////////////////////////////////////////
+
+HW 0 - due Thursday, January 22
+    --> see how to do it
+
+HW 1 - due Tuesday, January 27
+
+////////////////////////////////////////////////////////
+
+Taking a step back...what is logic?
+
+- analysis of an argument according to a set of rules
+- given a set of premises (and sometimes a conclusion)
+
+
+- a VALID conclusion is one that is always true
+    anytime all the premises are true
+
+
+Note that the premises might make no sense!
+
+
+////////////////////////////////////////////////////////
+
+Premise 1: If a person wears a red shirt,
+    then they don't like pizza.
+
+Premise 2: Fred is wearing a red shirt.
+
+Conclusion: Fred doesn't like pizza.
+
+
+
+--> Is this a valid argument? 
+
+
+
+(is there a hidden assumption we're making about Fred?)
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+Logical Arguments with "OR"
+    - can be ambiguous! Why? exclusive vs inclusive
+
+
+I order fries or I order chips.
+
+
+
+- in English, how do we interpret "or"? 
+
+
+
+- in programming? 
+
+
+
+
+"Or" in THIS class: 
+
+
+
+
+
+/////////////////////////////
+
+Premise 1: I'll fold the laundry or I'll do the dishes.
+Premise 2: I don't fold the laundry.
+
+--> What can I conclude? 
+
+
+
+
+//////////////////////////////////////////////////////////
+
+num = 5;
+if (num < 4 || x >= 10) {
+    statement;
+}
+
+
+
+Suppose we know "statement" is executed
+--> What can we conclude? 
+
+
+
+
+
+/////////////////////////////////////////////////////////
+
+x = 9;
+if (num < 4 || x >= 10) {
+    if (num > 2) {
+        statement;
+    }
+}
+
+
+
+Suppose we know "statement" is executed
+--> What can we conclude? 
+
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+What rule are we seeing with an "or" statement,
+where we know that one of the statements is NOT true?
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+Logical Arguments with "IF/THEN" (aka "implies" -> )
+
+If it is raining, then I will get wet.
+It is raining.
+
+--> What can I conclude? 
+
+
+
+
+How to write with -> symbol?
+    p:
+    q: 
+
+
+////////////////////////////////////////////////////////
+
+When we have an "if/then" statement,
+and we know that the "if" part is true?
+
+    ...what can we always conclude?
+
+
+
+
+
+/////////////////////////////////////////////////////////
+
+If I don't hear my alarm, then I will be late for class.
+I am late for class.
+
+--> What can I conclude? 
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+
+If I don't hear my alarm, then I will be late for class.
+I hear my alarm.
+
+--> What can I conclude? 
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+
+If I don't hear my alarm, then I will be late for class.
+I'm not late for class.
+
+--> What can I conclude? 
+
+
+
+
+
+is equivalent to (called the contrapositive):
+
+
+
+
+
+
+if (condition) {
+    statement
+}
+
+--> what if we know statement is NOT executed? 
+
+
+
+
+If p Then q
+
+
+
+////////////////////////////////////////////////////////
+
+More if/then logic in programming.
+
+
+if (num < 4 || x >= 10) {
+
+    y = 17;
+}
+
+--> suppose y is 17 here. What do we know?
+
+
+
+/////////////////////////////////////////////////////////
+
+y = 10;
+if (num < 4 || x >= 10) {
+
+    y = 17;
+}
+
+--> suppose y is 17 here. Can we conclude anything now?
+
+
+
+
+
+//////////////////////////////////////////////////////////
+
+if (num < 4 || x >= 10) {
+
+    y = 17;
+}
+
+--> suppose y is NOT 17 here. What do we know?
+
+
+
+///////////////////////////////////////////////////////
+
+Attendance/practice quiz in Canvas
+
+
+///////////////////////////////////////////////////////
+
+Logic puzzles.
+
+The puzzles in this lecture are from or inspired by:
+"What is the Name of This Book?", by Raymond Smullyan
+
+///////////////////////////////////////////////////////
+
+The island of Knights and Knaves.
+Each inhabitant is either a knight or a knave.
+
+Knights ALWAYS tell the truth, and knaves ALWAYS lie.
+
+///////////////////////////////////////////////////////
+
+Who can say, "I'm a knave"?  
+
+Can a knight? 
+Can a knave? 
+
+
+
+//////////////////////////////////////////////////////////
+
+You see two inhabitants, Eve and Fred.
+
+Eve says, "I am a knave or Fred is a knight."
+
+
+
+What are Eve and Fred? 
+
+
+
+(what does the "or" mean?) 
+
+
+
+Her WHOLE statement is the or
+
+/////////////////////////////////////////////////////////
+
+You see two different inhabitants, Ava and Bob.
+
+Ava says that Bob is a knave.
+Bob says, "Neither Ava nor I are knaves."
+
+
+Rewrite Bob: 
+
+
+
+What are Ava and Bob? 
+
+
+
+
+
+What does "neither" mean?
+
+
+
+
+////////////////////////////////////////////////////////
+
+Homework 0: due Thursday, January 22
+    - get Sireum + GitHub ready (do this now!)
+    - post something in Ed Discussion
+    - come to office hours or post in Ed Discussion if
+        you need software setup help!
+
+Homework 1: due Tuesday, January 27
+    - first page of homework is logical reasoning
+        (what we did today)
+    - second page is logic puzzles
+
+Next: finish logic puzzles, start truth tables
