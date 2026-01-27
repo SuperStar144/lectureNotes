@@ -43,10 +43,16 @@ else {
     statements3;
 }
 
+know (x < 3 || y > 4) is false 
+    so (x >= 3 && y <= 4)
+
+know (x < 5 && y == 7) is true
+    conflicts with y <= 4
+
 
 
 --> is it possible for "statements2" to execute?7
-
+no, it is not
 
 
 
@@ -71,8 +77,16 @@ What types are Sarah, Bill, and Mae?
 
 (How might we simplify everything?)
 
+Sarah: Bill is a knight
+Bill: Mae is a knight
+Mae: Bill would say I'm a knave
 
+Suppose Sarah is a knight. Then Bill must be a knight and Mae must also be a knight. This doesn't work since Bill would
+    say that Mae is a knight.
+
+Suppose instead Sarah is a knave. Then Bill and Mae must be knaves. 
     
+All 3 are knaves.
 
 
 ////////////////////////////////////
@@ -89,7 +103,12 @@ Unicorn says: "Yesterday was one of my lying days, too."
 
 What day is it?
 
+Sunday: Lion didn't lie yesterday and should be telling the truth
+Tuesday/Wednesday/Friday/Saturday: whoever is lying that day also lied the day before, but should be lying about that.
+Monday: Unicorn tells the truth Mon/Sun, should say they didn't lie.
+Thursday: Lion truthfully says they lied on Wednesday. Unicorn correctly lies about lying on Wednesday. 
 
+Thursday.
 
 ////////////////////////////////
 
@@ -106,7 +125,7 @@ You see both of them together.
 The first one says: "I'm Tweedledum." 
 The second one says: "I'm Tweedledee."
 
-Which is which? What day is it?
+Which is which? What day is it? Sunday. Every other day they would give the same name. They are who they say.
 
 
 
@@ -139,7 +158,17 @@ The second one says: "I'm Tweedledee!"
 
 Who gets the rattle?
 
+Suppose the first twin is telling the truth. Rattle goes to Tweedledee. Second twin must be lying, so second twin is 
+Tweedledum. first twin is Tweedledee, so first twin gets the rattle.
+
+Suppose the first twin is lying. Rattle goes to Tweedledum. Second twin must be Tweedledee because they are telling the
+truth. First twin is Tweedledum. The first twin (Tweedledum) gets the rattle. 
+
+First twin gets the rattle.
+
 Who is who?
+
+Not enough information to deduce.
 
 
 ///////////////////////////////////////////
@@ -156,7 +185,17 @@ Gold casket: "The portrait is in this casket."
 Silver casket: "The portrait is not in this casket."
 Lead casket: "The portrait is not in the gold casket."
 
+All messages could be false or just one
+
 Where is the portrait?
+
+Suppose it's in the gold. Both gold and silver statements would be true, so it's not in the case.
+
+Suppose it's in the silver. Just one statement is true, so this works
+
+Suppose it's in the lead. Both silver and lead are true, so can't work 
+
+Answer: in the silver
 
 
 
@@ -196,7 +235,7 @@ Albert says: "Then I also know when Cheryl's birthday is."
 
 When is it?
 
-
+July 16
 
 
 ///////////////////////////////////
@@ -217,15 +256,16 @@ Basic operations:
 
 
 Basic logic gates (draw on board)
-
+    AND, OR, NOT
 
 gates still used to design circuits
 
 
 why do we care about equivalent circuits?
-
+    it allows us to reduce the complexity of the circuit. 
 
 what about programming?
+    it keeps the code easily readable and ensures optimization 
 
 ///////////////////////////////////////////////////
 
@@ -236,28 +276,28 @@ AND:
 
 p q  #  p ∧ q
 --------------
-T T  #    
-T F  #    
-F T  #     
-F F  #    
+T T  #    T
+T F  #    F
+F T  #    F 
+F F  #    F
 
 
 OR:
 
 p q  #  p ∨ q
 --------------
-T T  #    
-T F  #    
-F T  #    
-F F  #    
+T T  #    T
+T F  #    T
+F T  #    T
+F F  #    F
 
 
 NOT:
 
 p  # ¬p
 --------
-T  # 
-F  # 
+T  #  F
+F  #  T
 
 ////////////////////////////////////////////////
 
@@ -275,16 +315,16 @@ Otherwise we have not.
 
 p q  #  p → q
 --------------
-T T  #    
-T F  #      
-F T  #    
-F F  #     
+T T  #    T
+T F  #    F
+F T  #    T
+F F  #    T 
 
 /////////////////////////////////////////
 
 How does the implies operator relate to programming?
 
-
+it's an if-statement (condition and the statements inside)
 
 //////////////////////////////////////////
 
@@ -322,6 +362,8 @@ Basic operations:
 
 ////////////////////////////////////////
 
+if (!p || q && r)
+
 Consider ¬p ∨ q ∧ r.
 
 --> what operation do we do first?
@@ -330,7 +372,7 @@ Consider ¬p ∨ q ∧ r.
 
 Order of operations
 
-In math?
+In math? (), exponent, multiplication/division, addition/subtraction
 
 
 
@@ -338,6 +380,8 @@ In math?
 For logic statements:
 
 From highest (happens first) to lowest (happens last) precedence:
+
+(), ¬, ∧, ∨, →
 
 
 ////////////////////////////////////////////////
@@ -348,7 +392,7 @@ Given this statement:
 
 Add () to show the order of operations.
 
-
+(¬p) ∨ (q ∧ r)
 
 
 Evaluate the above statement using these
@@ -358,7 +402,8 @@ p is T
 q is F
 r is F
 
-
+(F) ∨ (F)
+F
 
 ///////////////////////////////////////////
 
