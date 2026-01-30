@@ -34,10 +34,13 @@ Propositional logic.
 
 --> what are propositional atoms?
 
+Smallest pieces of a statement that can be true/false 
+Will be our variables
+
 --> what are propositions?
 
-
-
+A statement that can be true or false
+Combination of propositional atoms and logical operators
 
 ////////////////////////////////////////
 
@@ -48,12 +51,14 @@ z != 7 && str.contains(sub)
 
 --> what are the propositional atoms?
 
-
+p: z == 7 (remove logical operator)
+q: str.contains(sub)
 
 
 
 --> express in propositional logic
 
+¬p ∧ q
 
 ////////////
 ∧ ∨ ¬ →
@@ -62,16 +67,20 @@ z != 7 && str.contains(sub)
 Example:
 
 You can't enroll for the course if you haven't taken 
-the prerequisite.
+the prerequisite or the course is full.
 
 
 --> what are the propositional atoms?
 
-
+p: You can enroll for the course
+q: You have taken the prerequisite
+r: The course is full
 
 --> translate to propositional logic:
 
+rewritten as: if you haven't taken the prerequisite or the course is full then you can't enroll.
 
+(¬q ∨ r) → ¬p
 
 really saying?
 
@@ -79,9 +88,12 @@ really saying?
 
 What is the *contrapositive* of our statement?
 
+p → q is equivalent to ¬q → ¬p
 
+¬¬p → ¬(¬q ∨ r)
+p → (q ∧ ¬r)
 
-
+If you can enroll, then you have taken the prerequisite and the course isn't full.
 
 //////////////////////////////////////////
 ∧ ∨ ¬ → 
@@ -97,12 +109,17 @@ if (x <= 2 || y >= 0) {
 
 Propositional atoms?
 
+If all conditions happened, answer will be 25
 
+p: x <= 2
+q: y >= 0
+r: z == 17
+s: answer == 25
 
 
 Translation? (if ... then ...)
 
-
+(p ∨ q) ∧ ¬r → s
 
 
 
@@ -110,36 +127,61 @@ Translation? (if ... then ...)
 
 Consider these two statements:
 
+p: I am at least 16 years old
+q: I can drive a car
+
 1) If I am at least 16 years old, then I can drive a car.
 
+    p → q
 
+    only false when p = T, q = F
 
 2) I'm not at least 16 years old or I can drive a car.
 
+    ¬p ∨ q
 
+    only false when both sides of OR are false
 
+    p = T, q = F
 
 --> are they saying the same thing?
 
-
+Supposedly so
 
 
 --> could we PROVE it? (equiv1.logika, equiv2.logika)
 
+YES
 
+Complete truth tables for both statements.
+***Show that they have the same output for every single truth assignment***
 
 //////////////////////////////////
 
 Consider these two statements:
 
+p: I am at least 16 years old
+q: I can drive a car
+
 1) If I am at least 16 years old, then I can drive a car.
+
+    p → q
 
 2) If I can drive a car, then I am at least 16 years old.
 
+    q → p
 
 --> are they saying the same thing?
 
+Supposedly not
+
 --> could we PROVE our answer?
+
+Yes, by demonstrating that there is one truth assignment that does not match (don't need to check all of them.)
+Creating a full truth table isn't wrong, it's just more work than is required.
+
+e.g. p = F, q = T
+makes the first statment true but the second statement false. 
 
 
 //////////////////////////////////
@@ -159,9 +201,11 @@ if (a == 4 || a == 5) {
 How could we express the NEGATION
 (i.e., what condition would be true for the "else")?
 
+if (!(a == 4 || a == 5))
 
+negate an or: negate both sides, flip to and
 
-
+if (a != 4 && a != 5)
 
 ///
 
@@ -172,7 +216,7 @@ if (a == 4 && b == 5) {
 How could we express the NEGATION
 (i.e., what condition would be true for the "else")?
 
-
+if (a != 4 || b != 5)
 
 
 
@@ -181,9 +225,10 @@ How could we express the NEGATION
 
 DeMorgan's laws in propositional logic:
 
-¬(p ∨ q) is equivalent to... 
+¬(p ∨ q) is equivalent to... ¬p ∧ ¬q
+    They are logically equivalent because for ALL possible truth assignments, they have the same output.
 
-¬(p ∧ q) is equivalent to...
+¬(p ∧ q) is equivalent to... ¬p ∨ ¬q
 
 
 --> how can we prove the first of DeMorgan's laws?
@@ -204,7 +249,7 @@ if (Character.isDigit(letter) || num < 10) {
 --> how would we negate it without using a ! operator?
     also no extra ()
 
-
+(Character.isDigit(letter) == false && num >= 10)
 
 
 
@@ -216,7 +261,7 @@ if ((y >= 4 || num != 14) && x > 0) {
     statements
 }
 
-
+if ((y < 4 && num == 14) || x <= 0)
 
 
 ///////////////////////
