@@ -1,0 +1,125 @@
+HW 3 due tonight
+
+    #5: p ∨ q ∨ r ⊢ r ∨ q ∨ p
+
+    What will the structure be?
+
+
+    How to build conclusion?
+
+
+
+
+
+Exam 1 is Thursday, February 12
+    Exam review session (by Erik and Drake):
+        Wednesday, February 11, 2:30-5:00 pm in DUE 1118
+
+No new homework this week
+
+/////////////////////
+
+Today:
+- more involved natural deduction examples
+- exam 1 review
+
+/////////////////////
+
+Reminder: implies-elimination, ImplyE
+
+          P,P → Q
+ImplyE: -----------
+            Q
+
+
+
+Implies symbol.
+
+Typing a → in Logika for natural deduction:
+
+    __>:
+
+(two underscores, >, :)
+
+//////////////////////////
+
+Bigger examples: ex1.sc, ex2.sc, ex3.sc
+
+
+/////////////////////////
+
+Logika features/tips
+
+- see proof step summary
+- renumber/reformat proofs
+- interpreting errors
+
+
+/////////////////////////
+
+General proof strategy to this point
+
+
+
+/////////////////////////
+
+(in-class quiz)
+
+/////////////////////////
+
+Exam 1 review.
+
+Covers everything we've done up to this point 
+(including today).
+
+
+See Canvas announcement for list of topics.
+
+
+
+
+How to prove two propositional logic statements are 
+equivalent?
+
+    Approach 1:
+
+    Approach 2:
+
+
+
+
+How to prove propositional logic statements are 
+NOT equivalent?
+
+
+
+
+What is satisfiability? 
+
+
+
+- Determining whether an argument is valid or invalid
+    (what is an argument?)
+    valid: 
+
+    how prove valid?
+
+    how prove invalid?
+
+
+/////////////////////////////////////////
+
+Closed notes/computers.
+
+
+Mix of multiple choice (like quizzes) and open-ended (like homework)
+
+Some problems will ask for a proof or explanation --
+    read carefully!
+
+
+How to review?
+
+////////////////////////////////////////
+
+See practice problems.
