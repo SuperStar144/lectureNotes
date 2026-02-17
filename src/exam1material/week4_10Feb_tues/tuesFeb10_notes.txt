@@ -4,6 +4,31 @@ HW 3 due tonight
 
     What will the structure be?
 
+        p ∨ q ∨ r: top-level is the rightmost or
+        //(p ∨ q) ∨ r
+
+        Try OrE on premise
+        SubProof: assume p ∨ q
+
+            goal: r ∨ q ∨ p
+            top-level is the rightmost Or
+            could introduce OR if have r ∨ q
+                or if I had p
+
+            nested OrE
+            SubProof: assume p 
+                goal: r ∨ q ∨ p
+                r ∨ q ∨ p by OrI2()
+
+            SubProof: assume q 
+                goal: r ∨ q ∨ p
+                first get r ∨ q
+                then get r ∨ q ∨ p
+
+        SubProof: assume r
+
+            goal: r ∨ q ∨ p
+
 
     How to build conclusion?
 
@@ -50,7 +75,6 @@ Bigger examples: ex1.sc, ex2.sc, ex3.sc
 
 Logika features/tips
 
-- see proof step summary
 - renumber/reformat proofs
 - interpreting errors
 
@@ -59,7 +83,14 @@ Logika features/tips
 
 General proof strategy to this point
 
+1) list premises
+2) break down any premises you can to get extra information
 
+3) look at the conclusion
+
+4) consider if you will need OrE (probably will if you have an OR)
+
+Always consider order of operations!
 
 /////////////////////////
 
@@ -81,9 +112,14 @@ See Canvas announcement for list of topics.
 How to prove two propositional logic statements are 
 equivalent?
 
-    Approach 1:
+    Approach 1: two truth tables
+        for every possible truth assignment, the two
+        statements have the same output
 
     Approach 2:
+        deduction with two proofs
+        statement1 |- statement2
+        statement2 |- statement1
 
 
 
@@ -91,20 +127,45 @@ equivalent?
 How to prove propositional logic statements are 
 NOT equivalent?
 
+    find ONE truth assignment where the two statements
+    have different outpu
 
+    can't use deduction to prove not equivalent
 
 
 What is satisfiability? 
 
+    need ONE truth assignment where the statement outputs true
+    (if we did a truth table, would be a tautology or contingent)
+
+To show NOT satisfiable?
+
+    need FULL truth table to show the statement always outputs false
+    (i.e., is contradictory)
 
 
 - Determining whether an argument is valid or invalid
     (what is an argument?)
+
+        premises, conclusion
+
     valid: 
+        if for every truth assignment where all premises are true,
+        the conclusion is also true
 
     how prove valid?
+        1) truth table with all premises and conclusion
+        look at truth assignments that make all premises true,
+        make sure they make the conclusion true
+
+        2) deduction
 
     how prove invalid?
+
+        find ONE truth assignment where all premises true
+        but conclusion false
+
+        can't prove invalid with deduction
 
 
 /////////////////////////////////////////
@@ -112,7 +173,8 @@ What is satisfiability?
 Closed notes/computers.
 
 
-Mix of multiple choice (like quizzes) and open-ended (like homework)
+Mix of multiple choice (like quizzes) and open-ended 
+    (like homework)
 
 Some problems will ask for a proof or explanation --
     read carefully!
