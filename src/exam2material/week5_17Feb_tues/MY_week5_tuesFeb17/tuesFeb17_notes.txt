@@ -1,13 +1,13 @@
 Exam 1 discussion.
 
-Average: ??/100
-High: ??/100
+Average: 73/100
+High: 103/100 (2 students)
 
-A (90-100): ?? students
-B (80-89): ?? students
-C (70-79): ?? students
-D (60-69): ?? students
-F (below 60): ?? students
+A (90-100): 19 students
+B (80-89): 3 students
+C (70-79): 6 students
+D (60-69): 5 students
+F (below 60): 16 students
 
 
 
