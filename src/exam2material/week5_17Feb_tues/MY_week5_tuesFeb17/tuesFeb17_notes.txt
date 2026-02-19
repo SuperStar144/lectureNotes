@@ -78,6 +78,7 @@ Typing a → in Logika for natural deduction:
 If you are trying to prove an implies statement, what should you
 always do?
 
+Open up a SubProof assuming the left side with a goal of the right side
 
 ImplyI examples:
 impI1.sc, impI2.sc, imp3.sc.
