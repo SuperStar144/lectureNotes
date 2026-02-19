@@ -4,6 +4,8 @@ Where to find office hour times
 
 How to make sure you understand the material
 
+Fonts?
+
 ///////////////////////////////////////
 
 Today:
@@ -55,6 +57,11 @@ not2.sc, not3.sc
 
 ////////////////////////////////
 
+ImplyE: P->Q, P 
+        ----------
+        Q
+
+
 Bottom-elimination:
 
                F
@@ -62,17 +69,27 @@ BottomE:  ----------
                Q
 
 
+with implies:
+
+F -> anything
+is always true
+
 //how does this make logical sense?
 
 (think about what we are proving with an argument)
 
 /////////////////////////////////
 
-( p ∧ q, q → ¬p ) ⊢ ( ¬q )
+( p ∧ q, q → ¬p ) ⊢ ( r )
 Proof(
     1 ( p ∧ q )     by Premise,
     2 ( q → ¬p )    by Premise,
+    3 ( p ) by AndE1(1),
+    4 ( q ) by AndE2(1),
+    5 ( ¬p ) by ImplyE(2, 4),
+    6 ( F ) by NegE(3, 5),
 
+    7 ( r ) by BottomE(6)
 )
 
 
@@ -97,11 +114,34 @@ PbC:  -------------------
 Proof(
     1 ( ¬¬p )   by Premise,
 
+    2 SubProof(
+        3 Assume(¬p),
+        4 ( F ) by NegE(3, 1)
+        //goal: F
+    ),
+    7 ( p ) by PbC(2)
+
+    //want p after PbC
 )
 
 
 
 <-- what's wrong with using NegI?
+
+( ¬¬p ) ⊢ ( p )
+Proof(
+    1 ( ¬¬p )   by Premise,
+
+    2 SubProof(
+        3 Assume(¬p),
+        4 ( F ) by NegE(3, 1)
+        //goal: F
+    ),
+    7 ( ¬¬p ) by NegI(2) //this is a cycle
+
+    //want p after PbC
+)
+
 
 
 ///////////////////////////////////
@@ -124,7 +164,15 @@ Conclusion?
 Proof(
     1 ( p ∨ q )     by Premise,
     2 ( ¬p )        by Premise,
-
+    3 SubProof(
+        4 Assume ( p ),
+    ),
+    5 SubProof(
+        6 Assume ( q ),
+        7 ( F ) by NegE(6, 2),
+        8 ( q ) by BottomE(7)
+    ),
+    9 ( q ) by OrE(1, 3, 5)
 )
 
 
@@ -137,6 +185,11 @@ Examples: not4.sc, not5.sc
 //////////////////////////////////
 
 If time: how to approach proofs?
+
+do what we can with premises
+look at the conclusion, its top-level operator
+    try to follow pattern for that operator
+    no pattern, try PbC
 
 //////////////////////////////////
 

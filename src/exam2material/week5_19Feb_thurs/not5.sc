@@ -10,6 +10,27 @@ import org.sireum.justification.natded.prop._
       Proof(
         1 (  !(!p | !q) ) by Premise,
 
+        //try to prove p
+        //no pattern, try PbC to prove p
+        2 SubProof(
+          3 Assume (!p),
+          4 ( !p | !q ) by OrI1(3),
+          5 ( F ) by NegE(4, 1)
+          //goal: F
+        ),
+        6 ( p ) by PbC(2),
+
+        //no pattern, try PbC to prove q
+        7 SubProof(
+          8 Assume (!q),
+          9 ( !p | !q ) by OrI2(8),
+          10 ( F ) by NegE(9, 1)
+          //goal: F
+        ),
+        11 ( q ) by PbC(7),
+        12 ( p & q ) by AndI(6, 11)
+
+        //use AndI to get p & q
     )
   )
 }
