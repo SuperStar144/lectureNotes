@@ -19,14 +19,30 @@ HW 4 problem 6
 p → q   equivalent to   ¬p ∨ q
 
 
-p → q  ⊢  ¬p ∨ q
+p → q  ⊢  ¬p ∨ q **
+    Top-level operator of conclusion is an OR
+        Can I prove one side separately? Naaah
+        As a backup, try PbC.
+            Assume ¬(¬p ∨ q)
+                If we had ¬p ∨ q, we would have a F
+                    Try to prove just ¬p so can use OrI
+                    Use NegI subproof
+                        Assume pattern
+
+                        Goal: F
+            Goal: F
 
      
 
 
 
 ¬p ∨ q   ⊢  p → q
-
+look at conclusion: top-level is →
+ImplyI subproof
+    Assume p
+        Try OrE subproofs wiht premises
+        Goal in both: q
+    Goal: q
 
 
 
@@ -38,12 +54,27 @@ HW 4 problem 7
 
 
 ¬(p → q)  ⊢  p ∧ ¬q
-
+Think about proving both sides separately - doesn't work
+As a last resort, try PbC on the conclusion
+    Assume ¬(p ∧ ¬q)
+        If we had p → q, would contradict with premise
+        Try ImplyI subproof to get p → q
+            Assume p
+                No obvious way to get q, try PbC
+                Subproof, assume ¬q
+                ImplyE
+                Goal: false
+            Goal: q
+    Goal: F
 
 
 
 p ∧ ¬q   ⊢   ¬(p → q)
+Break apart the premise 
+Use NegI subproof for conclusion
+    Assume p → q 
 
+    Goal: F
 
 
 /////////////////////////
@@ -52,43 +83,74 @@ How do we approach proofs?
 
 1. Write out all the premises
 2. Extract all information from premises 
-        AND statement?
-        IMPLIES statement?
+        AND statement? use AndE1 and AndE2
+        IMPLIES statement? left side of the implies: use ImplyE
 
 
 3. Look at what you are trying to prove 
     (what do we look for in goal/conclusion?)
+    look at top level operator - that will guide your approach
 
-    ∧ - 
+    ∧ - think of two sides as two separate proofs.
+        Try to construct them both individually and put them together with AndI.
 
-    ∨ -   
+    ∨ - look at the two sides - can you prove one of them by themselves? If so, do that and use OrI1 or OrI2.
 
-    → - 
+        See if you have an OR statement already. If you do, try OrE to build your conclusion.
 
-    ¬(something) - 
+    → - use ImplyI subproof. Assume left side of our goal, try to reach right side.
 
-    just a propositional atom? like p.
+    ¬(something) - use NegI subproof. Assume "something", try to get F (contradiction).
+
+    just a propositional atom? like p. 
+        See where the atom appears in previous claims.
+        Is it in the right side of an →? 
+            Try to prove the left side of the → to use ImplyE.
+        Do you have an OR statement as a claim? Try OrE to get your atom in both cases
+        Can we get a F? use BottomE to conclude our atom.
+        Try PbC subproof. Assume ¬p, try to get F.
 
 
-After each claim - 
+After each claim - scan all avaliable information (including assumptions) and see if you can extract anything (AND,
+    IMPLIES)
 
 
 
 Inside a subproof - 
     (What are the different subproofs?)
 
+    Goal at end of each
+    OrE - both subproofs need to end with the same claim (which should be whatever I was trying to prove when I 
+        opened the OrE subproofs)
+    ImplyI - try to get to the right side of my goal imply statement
+    PbC - F
+    NegI - F
+
+    after opening a subproof and writing down a goal, find the top level operator of that goal. Follow the same pattern
+        to nest a subproof ot build that goal.
+
     --> when do we open a subproof?
+        when you have one of the four subprooffs in mind.
 
     --> can we assume anything in a subproof? 
+        can assume ANY one statement opening a subproof.
 
+        but don't do it unless you have a pattern in mind.
 
 
 
 Doesn't fit a pattern or doesn't work out from above?
 
+might hit a brick wall - need to try a different strategy.
+    do you have an OR as a claim? Try OrE with it.
+    nothing is working? Try PbC. Assume ¬(what you want) and try to get an F.
 
 
-When to use BottomE?
+
+When to use BottomE? If you are using OrE and can't get your goal in one subproof but can get F, use BottomE to conclude
+    what you want.
+
+    DON'T use in PbC or NegI if you get F, even though you *could*. Won't help you finish the proof.
 
 
 
@@ -131,26 +193,26 @@ SOUNDNESS and COMPLETENESS of natural deduction in
     "true": demonstrate an argument with truth tables
 
 
-SOUNDNESS: ??
+SOUNDNESS: ?? everything I can prove is actually true.
 
 p ∧ q 
 --------
 p
 
 
-COMPLETENESS: ??
+COMPLETENESS: ?? I can prove everything that is true.
 
-
+propositional logic deduction is both sound and complete.
 
 
 
 --> what would it mean if a proof system was unsound?
 
-
+bad!
 
 --> what would it mean if a proof system was incomplete?
 
-
+there are true arguments we can't prove.
 
 
 

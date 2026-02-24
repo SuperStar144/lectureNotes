@@ -13,7 +13,8 @@ import org.sireum.justification.natded.prop._
         1 ( (c & n) __>: t ) by Premise,
         2 ( h & !s ) by Premise,
         3 ( h & !(s | c) __>: p ) by Premise,
-
+        4 ( h ) by AndE2(1),
+        5 ( !s ) by AndE2(2),
         
     )
   )
