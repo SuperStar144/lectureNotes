@@ -422,7 +422,7 @@ Write each statement in English. Is each one true or false?
 
 ///
 
-∃ x (Mammal(x) → Wings(x))
+∃ x (Fish(x) → Bird(x))
 
 
 
