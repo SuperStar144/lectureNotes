@@ -282,7 +282,7 @@ Set builder notation.
 
 {x: x ∈ ℕ, 5 ≤ x ≤ 10}
 
-
+{5,6,7,8,9,10}
 
 {k : k is a letter in "abracadabra"}
 
