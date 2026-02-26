@@ -1,5 +1,4 @@
 HW 4 due tonight
-    (remember to check link format)
 
 HW 5 will be posted after class
 
@@ -7,6 +6,7 @@ HW 5 will be posted after class
 
 Today:
 
+- Proof strategies
 - Discuss HW 4 problems 6 and 7
 - Proving theorems
 - Soundness and completeness
@@ -14,19 +14,130 @@ Today:
 
 /////////////////////////
 
+How do we approach proofs?
+
+1. Write out all the premises
+2. Extract all information from premises 
+        (what situations?)
+
+        And : use AndE1 and AndE2
+        Implies, left side of the implies: use ImplyE
+
+
+3. Look at what you are trying to prove 
+    (what do we look for in goal/conclusion?)
+    look at top level operator - that will guide your approach
+
+
+    ∧ - think of two sides as two separate proofs.
+        Try to construct them both individually, put
+        them together with AndI.
+
+    ∨ - look at the two sides - can you prove one of
+        them by themselves? If so, do that and use OrI1
+        or OrI2. 
+
+        See if you have an OR statement already. If you
+        do, try OrE to build your conclusion.
+
+    → - use ImplyI subproof. Assume left side of our goal,
+        try to reach right side
+
+    ¬(something) - use NegI subproof. Assume "something",
+        try to get F (contradiction)
+
+    just a propositional atom? like p.
+        see where the atom appears in previous claims
+        Is it on the right side of an ->?
+            try to prove the left side of the -> to use ImplyE
+        Do you have an OR statement as a claim? Try
+            OrE to get your atom in both cases.
+        Can we get a F? Use BottomE to conclude our atom.
+        Try PbC subproof. Assume ¬p, try to get F.
+
+
+After each claim - scan all available info (including assumes),
+    see if you can extract anything (AND, IMPLIEs)
+
+
+
+Inside a subproof - 
+    (What are the different subproofs?)
+
+    Goal at end of each:
+    OrE - both subproofs need to end with the same
+        claim (which should be whatever I was trying
+        to prove when I opened the OrE subproofs)
+    ImplyI - try to get to the right side of my
+        goal imply statement
+    PbC - F
+    NegI - F
+
+    after opening a subproof and writing down a goal,
+    find top level operator of that goal. Follow 
+    the same pattern to nest a subproof to build that goal.
+
+    --> when do we open a subproof?
+        when you have one of the four subproofs in mind
+
+    --> can we assume anything in a subproof? 
+
+    can assume ANY one statement when opening a subproof
+
+    but don't do it unless you have a pattern in mind
+
+
+Doesn't fit a pattern or doesn't work out from above?
+
+mind hit a brick wall - need to try a different strategy
+    do you have an OR as a claim? try OrE with it
+    nothing is working? Try PbC. Assume ¬(what you want),
+    try to get a F.
+
+
+
+
+
+When to use BottomE? If you are using OrE and can't 
+    get your goal in one subproof but can get F,
+    use BottomE to conclude what you want.
+
+    DON'T use in PbC or NegI if you get F, even though
+        you *could*. Won't help finish the proof.
+
+
+//////////////////////////////////
+
 HW 4 problem 6
 
 p → q   equivalent to   ¬p ∨ q
 
 
-p → q  ⊢  ¬p ∨ q
+p → q  ⊢  ¬p ∨ q **
+    Top-level operator of conclusion is an OR 
+        Can I prove one side separately? Naaah
+        As a backup, try PbC.
+            Assume  ¬(¬p ∨ q)
+                If we had ¬p ∨ q, we would have a F 
+                    Try to prove just ¬p so can use OrI1
+                    Use NegI subproof
+                        Assume p
+
+                        Goal F
+                    conclude ¬p
+            Goal: F
 
      
 
 
 
 ¬p ∨ q   ⊢  p → q
-
+look at conclusion: top-level is →
+ImplyI subproof
+    Assume p 
+        Try OrE subproofs with premise 
+        Goal in both: q
+    Goal: q
 
 
 
@@ -38,62 +149,33 @@ HW 4 problem 7
 
 
 ¬(p → q)  ⊢  p ∧ ¬q
+Think about proving both sides separately - doesn't work well
+As a last resort, try PbC on the conclusion
+    Assume ¬(p ∧ ¬q)
+        If we had p → q, would contradict with premise
+        Try ImplyI subproof to get p → q
+            Assume p 
+                No obvious way to get q, try PbC
+                Subproof, assume ¬q
+
+                Goal: F
+
+            Goal: q
+    Goal: F
 
 
 
 
 p ∧ ¬q   ⊢   ¬(p → q)
+Break apart the premise
+Use NegI subproof for conclusion
+    Assume p → q
+
+    goal F
 
 
 
-/////////////////////////
-
-How do we approach proofs?
-
-1. Write out all the premises
-2. Extract all information from premises 
-        AND statement?
-        IMPLIES statement?
-
-
-3. Look at what you are trying to prove 
-    (what do we look for in goal/conclusion?)
-
-    ∧ - 
-
-    ∨ -   
-
-    → - 
-
-    ¬(something) - 
-
-    just a propositional atom? like p.
-
-
-After each claim - 
-
-
-
-Inside a subproof - 
-    (What are the different subproofs?)
-
-    --> when do we open a subproof?
-
-    --> can we assume anything in a subproof? 
-
-
-
-
-Doesn't fit a pattern or doesn't work out from above?
-
-
-
-When to use BottomE?
-
-
-
-
-//////////////////////////////////
+///////////////////////////////////
 
 Bigger example: big.sc
 
@@ -131,26 +213,27 @@ SOUNDNESS and COMPLETENESS of natural deduction in
     "true": demonstrate an argument with truth tables
 
 
-SOUNDNESS: ??
+SOUNDNESS: ?? everything I can prove is actually true
 
 p ∧ q 
 --------
 p
 
 
-COMPLETENESS: ??
+COMPLETENESS: ?? I can prove everything that is true 
 
+propositional logic deduction is both sound and completeness
 
 
 
 
 --> what would it mean if a proof system was unsound?
 
-
+bad
 
 --> what would it mean if a proof system was incomplete?
 
-
+there are true arguments we can't prove 
 
 
 
@@ -184,9 +267,9 @@ A set is an unordered collection of elements
 
 ∈: is in, exists in
 
-    x ∈ A  means?
+    x ∈ A  means? element x exists in the set A
 
-    x ∉ A  means?
+    x ∉ A  means? element x does not exist in set A
 
 
 
@@ -199,14 +282,18 @@ Example: A = {1,4,7,11,20}
 
 - Common sets in math:
 
-    ℕ: 
-    ℤ: 
-    ℚ: 
-    ℝ: 
-    ℂ: 
-    ∅: 
+    ℕ:  natural number (integers starting with 1)
+    ℤ:  integers (postive, negative, 0 )
+    ℚ: rational numbers. I can write the number as
+        p/q where p, q ∈ ℤ and q != 0
+    ℝ: real numbers 
+    ℂ: complex numbers
+    ∅: null set / empty set
 
 ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ ⊂ ℂ
+
+⊂ is subset of
+
 
 ////////////////////////////////////
 
@@ -220,15 +307,22 @@ Set builder notation.
 
 {x: x ∈ ℕ, 5 ≤ x ≤ 10}
 
+{5,6,7,8,9,10}
 
 
 {k : k is a letter in "abracadabra"}
 
-
+{a, b, c, d, r}
 
 {x : x = 2k,  k ∈ ℕ}
 
+{2, 4, 6, 8, 10, ...}
 
+///////////////////////////
+
+<-- stopped here, will continue Thursday
+
+///////////////////////////
 
 {n : n = k^2, k ∈ Z}
 
