@@ -2,6 +2,7 @@ HW 5 due tonight
 
 HW 6 will be posted after class, due next Tuesday
     
+Exam 2 is March 12, the Thursday before spring break
 
 ///////////////////////
 
@@ -12,6 +13,8 @@ Today:
 - DeMorgan's laws for quantifiers
 - Introduction to rules for quantifiers in natural deduction
 
+∀ - for all
+∃ - there exists
 
 ////////////////////////
 
@@ -33,27 +36,58 @@ Translate to predicate logic and evaluate:
 
 CIS200 is a CS course with a lab
 
+(IsCS(CIS200) ⋀ HasLab(CIS200))
+
+IsCS(HasLab(CIS200)) - NO!
+    WRONG, IsCS wants a course, HasLab returns a boolean
+
 //
 
 Not all CS courses have a lab
+
+¬(∀ x (IsCs(x) → HasLab(x)))
+
+if we used an AND, would say ALL courses were CS and ALL courses had a lab
+
+true - CIS 301 does not have a lab
+
+OR: we can find a CS course that doesn't have a lab
+
+∃ x (IsCs(x) ⋀ ¬HasLab(x))
 
 //
 
 There is a non-CS course with a lab
 
+∃ x (¬ISCS(x) ⋀ HasLab(x))
+
 //
 
 No math course has a lab
+
+∀ x (IsMath(x) → ¬HasLab(x))
+
+(all math courses don't have a lab)
+
+¬(∃ x (IsMath(x) ⋀ HasLab(x)))
+
+(there does not exist a math course with a lab)
 
 //
 
 There is a CS course with more hours than a math course
 
+two quantifiers - one for CS and one for the math
+
+∃ x ∃ y (IsCS(x) ⋀ IsMath(y) ⋀ MoreHours(x,y))
+
+∃ x (IsCS(x) ⋀ (∃ y (IsMath(y) ⋀ MoreHours(x,y)) )
+
 //
 
 There is a CS course with more hours than any math course
 
-
+∃ x ∀ y (IsCS(x) ⋀ IsMath(y) → MoreHours(x,y))
 
 --> Where to put the quantifiers?
 
@@ -66,33 +100,33 @@ Evaluating predicate logic statements
 Our domain is k1...kn
 
 1) ∀ x P(x)
-    true when: 
-    false when: 
+    true when: P(k) is true for every k in our domain
+    false when: P(k) is false for at least one k in our domain
 
 2) ∃ x P(x)
-    true when: 
-    false when: 
+    true when: P(k) is true for at least one k in our domain
+    false when: P(k) is false for all k in our domain
 
 3) ¬(∀ x P(x))
-    true when: 
-    false when:
+    true when: P(k) is false for at least one k in our domain 
+    false when: P(k) is true for every k in our domain
 
 4) ¬(∃ x P(x))
-    true when: 
-    false when: 
+    true when: P(k) is false for all k in our domain
+    false when: P(k) is true for at least one k in our domain
 
 5) ∀ x ¬P(x)
-    true when: 
-    false when: 
+    true when: P(x) is false for all k in our domain
+    false when: P(x) is true for at least one k in our domain
 
 6) ∃ x ¬P(x)
-    true when: 
-    false when: 
+    true when: P(x) is false for at least one k in our domain
+    false when: P(x) is true for all k in our domain
 
 
 /////////////////
 
-Domain: ℤ (the integers)
+Domain: ℤ (the integers) - positive and negative and zero
 
 
 What do these mean in English? Are they true?
@@ -100,23 +134,35 @@ What do these mean in English? Are they true?
 
 ∀ n ∃ m (n^2 < m)
 
+For all integers, there exists another integer that is greater than the square of the first integer
 
+The square of every integer is less than some other integer
 
-
+true. For any integer n, n^2 + 1 is an integer bigger than n^2
 
 ∀ x ∃ y (x == y^2)
 
+Every integer is equal to the square of some other integer
 
+Every integer is a perfect square
 
+false. 2 is not a perfect square
 
 ∀ n ∃ m (n^2 == m)
 
+For all integers, their square is another integer
 
+The square of every integer is an integer
 
+true. Integers are closed under multiplication
 
 ∃ m ∀ n (n^2 == m)
 
+**order of quantifiers matters**
 
+I can find an integer that equals the sqaure of every other integer.
+
+false.
 
 /////////////////////////
 
@@ -129,17 +175,25 @@ Write the following in predicate logic (Domain: ℤ):
 
 The sum of two negative integers is negative
 
+∀ x ∀ y (x < 0 ⋀ y < 0 → (x + y < 0))
 
-
-
+true - adding two negative numbers will always yield a value less than the two original numbers
 
 
 The difference of two positive integers is
 not necessarily positive
 
+two quantifiers
 
+I can find two positive integers
 
+∃ x ∃ y (x > 0 ⋀ y > 0 ⋀ x - y >= 0)
 
+true: x = 2, y = 3. Both positive, but 2-3 = -1, which is not positive
+
+Not always the case that two positive integers have a positive difference
+
+∀ x ∀ y ¬(x > 0 ⋀ y > 0 → x - y > 0)
 
 /////////////////////////
 
@@ -160,7 +214,7 @@ Equivalence: DeMorgan's law (part 1).
 suppose our domain is k1 through kn
 
 
-¬(∃ x P(x)) is  equivalent to...¬(P(k1) V ... V P(kn))
+¬(∃ x P(x)) is  equivalent to... ¬(P(k1) V ... V P(kn))
 which is: ¬P(k1) ⋀ ... ⋀ ¬P(kn)
 
 
@@ -177,8 +231,8 @@ Equivalence: DeMorgan's law (part 2).
 
 suppose our domain is k1 through kn
 
-¬(∀ x P(x)) is equivalent to...
-
+¬(∀ x P(x)) is equivalent to... ¬(P(k1) ⋀ ... ⋀ P(kn))
+which is: ¬P(k1) ⋁ ... ⋁ ¬P(kn)
 
 
 
@@ -193,9 +247,10 @@ Apply DeMorgan's laws: example
 or outside a statement with logical connectives
 
     Reminder:
-        p → q is equivalent to (OR statement):
-        ¬(p ⋀ q) is equivalent to: 
-        ¬(p ⋁ q) is equivalent to: 
+        p → q is equivalent to (OR statement): 
+            ¬p ⋁ q
+        ¬(p ⋀ q) is equivalent to: ¬p ⋁ ¬q
+        ¬(p ⋁ q) is equivalent to: ¬p ⋀ ¬q
 
 ///
 Domain: students
@@ -211,7 +266,7 @@ Domain: students
 
 All prize-winners were 5th graders
 
-Translation: 
+Translation: ∀ x (wonPrize(x) → in5th(x))
 Negation: 
 
 Translation of negation: 
@@ -221,10 +276,19 @@ Translation of negation:
 A 5th grade prize winner isn't friends with anyone
 
 translation: 
+    two quantifiers - one for 5th grader, one for friends
+    ∃ x ∀ y (is5th(x) ⋀ wonPrize(x) ⋀ ¬friendsWith(x,y))
 negate:
+    ¬(∃ x ∀ y (is5th(x) ⋀ wonPrize(x) ⋀ ¬friendsWith(x,y)))
+    ∀ x ∃ y ¬((is5th(x) ⋀ wonPrize(x)) ⋀ ¬friendsWith(x,y))
+    ∀ x ∃ y (¬(is5th(x) ⋀ wonPrize(x)) ⋁ friendsWith(x,y))
 
+Switch the OR to be an implies:
+    ∀ x ∃ y (is5th(x) ⋀ wonPrize(x) → friendsWith(x,y))
+    
 translation of negation: 
-
+    All fifth grade prize winners have a friend
+    
 ////////////////////////////////////
 
 Arguments in predicate logic
