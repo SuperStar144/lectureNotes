@@ -2,6 +2,7 @@ HW 5 due tonight
 
 HW 6 will be posted after class, due next Tuesday
     
+Exam 2 is next Thursday (before spring break)
 
 ///////////////////////
 
@@ -12,6 +13,8 @@ Today:
 - DeMorgan's laws for quantifiers
 - Introduction to rules for quantifiers in natural deduction
 
+∀ - for all 
+∃ - there exists
 
 ////////////////////////
 
@@ -33,27 +36,67 @@ Translate to predicate logic and evaluate:
 
 CIS200 is a CS course with a lab
 
+IsCS(CIS200) ⋀ HasLab(CIS200)
+
+
+IsCS(HasLab(CIS200)) - NO! HasLab returns a boolean, but IsCS
+    takes a college course
+
 //
 
 Not all CS courses have a lab
+
+¬(∀ x (IsCS(x) -> HasLab(x)))
+
+if we used an AND, would say ALL courses were CS and ALL courses
+    had a lab
+
+
+CIS200, CIS301, MATH221, MATH510, PHYS213
+
+true - CIS 301 does not have a lab
+
+
+OR: we can find a CS course that doesn't have a lab
+
+∃ x (IsCS(x) ⋀ ¬HasLab(x))
 
 //
 
 There is a non-CS course with a lab
 
+∃ x (¬IsCS(x) ⋀ HasLab(x))
+
 //
 
 No math course has a lab
+
+∀ x (IsMath(x) -> ¬HasLab(x))
+
+(all math courses don't have a lab)
+
+¬(∃ x (IsMath(x) ⋀ HasLab(x))
+
+(there does not exist a math course with a lab)
 
 //
 
 There is a CS course with more hours than a math course
 
+two quantifiers - one for CS and one for the math
+
+∃ x ∃ y (IsCS(x) ⋀ IsMath(y) ⋀ MoreHours(x, y)) 
+
+∃ x (IsCS(x) ⋀ (∃ y (IsMath(y) ⋀ MoreHours(x, y)) )
+
 //
 
 There is a CS course with more hours than any math course
 
+∃ x ∀ y (IsCS(x) ⋀ IsMath(y) → MoreHours(x, y))
 
+OR
+∃ x (IsCS(x) ⋀ (∀ y (IsMath(y) → MoreHours(x, y)) )
 
 --> Where to put the quantifiers?
 
@@ -66,33 +109,33 @@ Evaluating predicate logic statements
 Our domain is k1...kn
 
 1) ∀ x P(x)
-    true when: 
-    false when: 
+    true when: P(k) is true for every k in our domain
+    false when: P(k) is false for one k in our domain
 
 2) ∃ x P(x)
-    true when: 
-    false when: 
+    true when: just need one P(k) true in our domain
+    false when: P(k) is false for every k in our domain
 
 3) ¬(∀ x P(x))
-    true when: 
-    false when:
+    true when: just need one k in our domain where P(k) is false
+    false when: P(k) is true for every k in our domain
 
 4) ¬(∃ x P(x))
-    true when: 
-    false when: 
+    true when: P(k) is false for every k in our domain
+    false when: just need one k where P(k) is true
 
 5) ∀ x ¬P(x)
-    true when: 
-    false when: 
+    true when: need P(k) to be false for every k in our domain
+    false when: we can find a k where P(k) is true
 
 6) ∃ x ¬P(x)
-    true when: 
-    false when: 
+    true when: just need one k where P(k) is false
+    false when: need P(k) to be true for every k 
 
 
 /////////////////
 
-Domain: ℤ (the integers)
+Domain: ℤ (the integers) - positive and negative and zero
 
 
 What do these mean in English? Are they true?
@@ -100,23 +143,44 @@ What do these mean in English? Are they true?
 
 ∀ n ∃ m (n^2 < m)
 
+Don't write like this:
+for each integer n, there exists another integer m that is greater
+    than the square of the first integer
 
+Do this instead:
+The square of every integer is less than some other integer 
 
+true. For any integer n, n^2 +1 is an integer bigger than n^2
 
 
 ∀ x ∃ y (x == y^2)
 
+Every integer is equal to the square of some other integer
+
+64 = 8^2
+16 = 4^2
+
+Every integer is a perfect square
 
 
+false. 2 is not a perfect square
 
 ∀ n ∃ m (n^2 == m)
 
+For all integers, their square is another integer
+
+
+True: The square of every integer is an integer
+
+(integers are closed under multiplication)
 
 
 
 ∃ m ∀ n (n^2 == m)
 
+I can find an integer that equals the square of every other integer
 
+false - no such number exists
 
 /////////////////////////
 
@@ -129,16 +193,31 @@ Write the following in predicate logic (Domain: ℤ):
 
 The sum of two negative integers is negative
 
+two quantifiers
+
+∀ x ∀ y (x < 0 ⋀ y < 0 -> (x + y < 0))
 
 
-
+true - adding two negative numbers will always yield a value
+    less than the two original numbers
 
 
 The difference of two positive integers is
 not necessarily positive
 
 
+two quantifiers
 
+I can find two positive integers and their difference isn't positive
+
+∃ x ∃ y (x > 0 ⋀ y > 0 ⋀ x - y <= 0)
+
+true: x = 2, y = 3. Both positive, but 2-3 = -1, which isn't positive.
+
+
+Not always the case that two positive integers have a positive difference
+
+¬(∀ x ∀ y (x > 0 y > 0  -> x - y > 0))
 
 
 /////////////////////////
@@ -160,8 +239,10 @@ Equivalence: DeMorgan's law (part 1).
 suppose our domain is k1 through kn
 
 
-¬(∃ x P(x)) is  equivalent to...¬(P(k1) V ... V P(kn))
-which is: ¬P(k1) ⋀ ... ⋀ ¬P(kn)
+¬(∃ x P(x)) is  equivalent to...¬(P(k1) ⋁ P(k2) ⋁ ... ⋁ P(kn))
+    by DeMorgan's: ¬P(k1) ⋀ ¬P(k2) ⋀ ... ⋀ ¬P(kn)
+
+which is? ∀ x (¬P(x))
 
 
 /////////////////////////
@@ -179,7 +260,10 @@ suppose our domain is k1 through kn
 
 ¬(∀ x P(x)) is equivalent to...
 
+¬(P(k1) ⋀ P(k2) ⋀ ... ⋀ P(kn))
 
+(¬P(k1) ⋁ ¬P(k2) ⋁ ... ⋁ ¬P(kn))
+∃ x (¬P(x))
 
 
 //////////////////////////////////////
@@ -194,6 +278,7 @@ or outside a statement with logical connectives
 
     Reminder:
         p → q is equivalent to (OR statement):
+            ¬p ⋁ q
         ¬(p ⋀ q) is equivalent to: 
         ¬(p ⋁ q) is equivalent to: 
 
@@ -209,6 +294,8 @@ Domain: students
 
 /////////////////////////
 
+(skipped - recommend doing on your own)
+
 All prize-winners were 5th graders
 
 Translation: 
@@ -221,9 +308,27 @@ Translation of negation:
 A 5th grade prize winner isn't friends with anyone
 
 translation: 
+    two quantifiers - one for 5th grader, one for friends
+
+  ∃ x ∀ y (in5th(x) ⋀ wonPrize(x) ⋀ ¬friendsWith(x, y))  
+
 negate:
 
+     ¬(∃ x ∀ y (in5th(x) ⋀ wonPrize(x) ⋀ ¬friendsWith(x, y))
+    ∀ x ∃ y ¬((in5th(x) ⋀ wonPrize(x)) ⋀ ¬friendsWith(x, y))
+    ∀ x ∃ y (¬(in5th(x) ⋀ wonPrize(x)) ⋁ friendsWith(x, y))
+    ∀ x ∃ y (¬(in5th(x) ⋀ wonPrize(x)) ⋁ friendsWith(x, y))
+
+switch the OR to be an implies:
+    ∀ x ∃ y (in5th(x) ⋀ wonPrize(x)) → friendsWith(x, y))
+
+
 translation of negation: 
+    All 5th grade prize winners have a friend
+
+////////////////////////////////////
+
+<-- stopped here, will continue Thursday
 
 ////////////////////////////////////
 
