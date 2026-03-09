@@ -3,7 +3,8 @@ HW 6 due Tues March 10
 Exam 2 is Thurs March 12
 --> more info posted soon
 --> will review on Tues March 10
---> Erik and Drake will have a review session Wednesday, March 11 2:30-5pm in DUE 1118
+--> Erik and Drake will have a review session 
+    Wednesday, March 11 2:30-5pm in DUE 1118
 
 ////////////////////
 
@@ -12,8 +13,25 @@ HW 5 comments:
 
 7 (a). If A ⋃ C = B ⋃ C, must A = B?
 
+A = {1,3}
+B = {2,3}
+C = {3}
 
 
+
+Is this a counterexample? NO
+
+If we want a counterexample, needs sets A,B,C where A ⋃ C = B ⋃ C
+    but A != B
+
+
+A = {4}
+B = {}
+C = {4}
+
+A ⋃ C = {4}
+B ⋃ C = {4}
+but A != B
 
 7 (b). If A ⋂ C = B ⋂ C, must A = B?
 
@@ -33,6 +51,12 @@ Arguments in predicate logic
 Set of premises
 Conclusion
 
+in propositional logic, valid when: 
+    every truth assignment that make each premise true
+    also make the conclusion true
+
+
+
 Argument is VALID in general: regardless of domain,
     whenever all the premises are true,
     then the conclusion is also true
@@ -46,28 +70,44 @@ Examples -- are the following arguments valid?
 
 ///
 
+Premises:
+everything that's P is also Q
+there's something in my domain that's P 
+
+Conclusion: there is something in my domain that's Q
+
 Premises: ∀ x (P(x) → Q(x)), ∃ x P(x)
 Conclusion: ∃ x Q(x)
 
-Valid or not? 
+Valid or not? yes
+
+whatever thing was P is also a thing that's Q 
 
 
 ///
 
+Premise: everything in my domain is P 
+Conclusion: there's something in my domain that's P 
+
 Premises: ∀ x P(x)
 Conclusion: ∃ x P(x)
 
-Valid or not?
+Valid or not? no. Wouldn't work if domain was empty.
 
 /////////////////////////////////
 
-soundness ?
+soundness: everything we can prove with our proof system
+    is actually true
 
 
-completeness ?
+completeness: we can use our proof system to prove everything 
+    that is true 
 
 
-predicate logic?
+predicate logic? will be incomplete
+
+    (there will be true arguments in some domains that we 
+    can't prove because they're not true in every domain)
 
 /////////////////////////////////
 
@@ -100,7 +140,7 @@ In Logika, ∃ x P(x) is written as:
 
 
 
---> what is "T"? my domain 
+--> what is "T"? domain 
 
 
 Settings->Command Palette->Tasks (run task)->Sireum slang template->
@@ -168,14 +208,14 @@ in that domain?
 Syntax:
 
 (
-    ∀ ((x: T) => Human(x))
+    ∀ ((x: T) => Human(x)) //everyone in my domain is Human
 )
 ⊢
-( Human(Socrates) )
+( Human(Socrates) ) //Socrates is Human
 
 Proof(
     1 ( ∀ ((x: T) => Human(x)) )    by Premise,
-    2 ( Human(Socrates) )           by ???
+    2 ( Human(Socrates) )           by AllE[T](1)
 )
 
 Note: This assumes "Socrates" and "Human" were both parameters
@@ -206,11 +246,13 @@ First: consider these two statements:
 
 are they equivalent?
     ∀ x (P(x) ⋀ Q(x))  - translation?
+        everything in my domain is both P and Q
 
 
 
 
     (∀ x P(x)) ⋀ (∀ x Q(x)) - translation?
+        everything my domain is P and everything in my domain is Q
 
 
 
@@ -256,7 +298,7 @@ Rule syntax:
     ...
     P(a)
 )),
-10 ( ∀ ((x: T) => P(x)) ) by ???
+10 ( ∀ ((x: T) => P(x)) ) by AllI[T](4)
 
 
 //a could be any (fresh) individual name
@@ -283,6 +325,9 @@ Are these statements equivalent?
 
 ∀ x (P(x) ⋁ Q(x))           (∀ x P(x)) ⋁ (∀ x Q(x))
 
+could prove:
+premise: (∀ x P(x)) ⋁ (∀ x Q(x))
+conclusion: ∀ x (P(x) ⋁ Q(x)) 
 
 //////////////////////////////////////////
 
@@ -338,8 +383,22 @@ Suppose you are trying to prove this conclusion:
 
 How to construct?
 
+AllI, name a random individual (a)
+    ImplyI
+        assume P(a) ⋀ Q(a)
+            NegI
+                assume R(a)
+
+                //goal: F
+        //goal: ¬R(a)
+
+    //goal: P(a) ⋀ Q(a) → ¬R(a)
 
 
+
+////////////////////////////
+
+<-- stopped here, will continue Tuesday
 
 ////////////////////////////
 
