@@ -36,10 +36,18 @@ Today:
 
 Reminder:
 
-AllE - when can we use?
+AllE - when can we use? 
+    A for all statement and an individual in the domain (can be a parameter to proof function OR introdcued in a subproof)
 
 
 AllI - when do we use? idea?
+    When we want to create/introduce a for all statement, use AllI
+    Involves a subproof
+        Name a random individual in my domain at the beginning of the subproof 
+            They have to be new (haven't used before)
+        By the end of the subproof: whatever statement I want for everyone, be able to make that statement about the 
+        random individuals.
+        Right after subproof: introduce same statement with a for all
 
 ////////////////////////
 
@@ -47,6 +55,9 @@ Bigger example: allBig.sc
 
 ////////////////////////
 
+ExistsI - introducing a there exists statement
+if I have a statement about an individual in my domain
+can always use ExistsI to create an exists statement
 
 Putting things together: bothQuant.sc
 
