@@ -5,9 +5,27 @@ import org.sireum.justification._
 import org.sireum.justification.natded.pred._
 import org.sireum.justification.natded.prop._
 
-// ¬(∃ x P(x)) |- ∀ x ¬P(x)
+// ∀ x ¬P(x)   equivalent to   ¬(∃ x P(x))
 
-@pure def bothQuant[T](P: T=>B @pure, Q: T=>B @pure): Unit = {
+//first direction is very similar to exists2.sc
+@pure def demorgan1A[T](P: T=>B @pure): Unit = {
+  Deduce(
+    (
+      ∀((x: T) => !P(x))
+    )
+    |-
+    (
+      !(∃((x: T) => P(x)))
+    )
+    Proof(
+      1 ( ∀((x: T) => !P(x)) ) by Premise,
+
+    )
+  )
+}
+
+//we did this direction before break
+@pure def demorgan1B[T](P: T=>B @pure): Unit = {
   Deduce(
     (
       !(∃((x: T) => P(x)))
@@ -17,8 +35,7 @@ import org.sireum.justification.natded.prop._
       ∀((x: T) => !P(x))
     )
     Proof(
-      1 ( !(∃((x: T) => P(x))) ) by Premise,
-
+      1 (  !(∃((x: T) => P(x)))   ) by Premise,
       //use AllI pattern to prove ∀((x: T) => !P(x))
       2 Let ((a: T) => SubProof(
         //use NegI pattern to prove goal of !P(a)
@@ -39,7 +56,7 @@ import org.sireum.justification.natded.prop._
       )),
       8 ( ∀((x: T) => !P(x)) ) by AllI[T](2)
 
-      //goal: ∀((x: T) => !P(x))   
+      //goal: ∀((x: T) => !P(x))
     )
   )
 }

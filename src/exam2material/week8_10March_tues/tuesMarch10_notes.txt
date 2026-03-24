@@ -5,7 +5,7 @@ HW 6 is due tonight
 Exam 2 is Thursday, March 12 during class
 
 Exam 2 review session (by Erik and Drake):
-    Wednesday, March 11 2-5:30 pm in  DUE 1118
+    Wednesday, March 11 2:30-5:00 pm in  DUE 1118
 
 No new homework this week
 
@@ -13,17 +13,19 @@ No new homework this week
 
 Top-level operators with quantifiers
 
-- officially, quantifiers should have the HIGHEST precedence, before any operators
+- officially, quantifiers should have the HIGHEST precedence, 
+    before any operators
 
---> but Logika interprets them to have the LOWEST precedence (making them the top-level operator)
+--> but Logika interprets them to have the LOWEST precedence 
+    (making them the top-level operator)
 
 
 I will use parentheses to be clear what precedence to use with quantifiers
 
 Top-level operators for:
 
-(∀ x P(x)) ⋀ (∀ x Q(x))
-∀ x (P(x) ⋁ Q(x))
+(∀ x P(x)) ⋀ (∀ x Q(x)) - AND is top-level
+∀ x (P(x) ⋁ Q(x)) - for all quantifier
 
 
 ///////////////////////////////
@@ -37,9 +39,19 @@ Today:
 Reminder:
 
 AllE - when can we use?
+    a for all statement 
+    individual (either a parameter to proof function OR 
+        introduced in a subproof)
 
 
 AllI - when do we use? idea?
+    when we want to create/introduce a for all statement, use AllI 
+    involves a subproof
+        name a random individual in my domain at beginning of subproof
+            (must be an individual I haven't used before)
+        by end of subproof: whatever statement I want for everyone,
+            be able to make that statement about my random individual
+        right after subproof: introduce same statement with a for all 
 
 ////////////////////////
 
@@ -47,12 +59,45 @@ Bigger example: allBig.sc
 
 ////////////////////////
 
+ExistsI - introducing a there exists statement
+if I have a statement about an individual in my domain 
+can always use ExistsI to create a there exists statement 
+
 
 Putting things together: bothQuant.sc
 
 ///////////////////////
 
 in-class quiz
+
+
+(  
+        ¬(∃ ((x: T) => ( ¬P(x) ⋀ Q(x) ) )) 
+    ) 
+⊢ 
+    (   
+        ∀ ((x: T) =>  ( ¬P(x) → ¬Q(x) ))
+    )
+Proof(
+    1 ( ¬(∃ ((x: T) => ( ¬P(x) ⋀  Q(x) )) )) by Premise,
+    2 Let ((a: T) => SubProof(
+        //use ImplyI
+        3 SubProof(
+            4 Assume ( ¬P(a) ),
+
+            //use NegI to get ¬Q(a)
+            5 SubProof(
+               6 Assume ( Q(a) ),
+               7 ( ¬P(a) ⋀ Q(a) ) by AndI(4, 6),
+               8 ( ∃ ((x: T) => ( ¬P(x) ⋀  Q(x) )) ) ) by ExistsI[T](7),
+               9 ( F ) by NegE(8, 1)
+           ),
+           10 ( ¬Q(a) ) by NegI(5)
+        ),
+        11 (¬P(a) → ¬Q(a)) by ImplyI(3)
+    )), 
+    12 ( ∀((x: T) => (¬P(x) → ¬Q(x))) ) by AllI[T](2)   
+)
 
 ///////////////////////
 
