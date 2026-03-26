@@ -23,6 +23,8 @@ Exam grades in Canvas
 
 HW 7 will be posted after class, due Tues March 31
 
+CS majors - group advising reminder
+
 ////////////////////////////////////////////////////
 
 Today:
@@ -38,6 +40,23 @@ Exists elimination - ExistsE[T]
 
 Idea: we know a statement is true for *some* individual
 Create an alias for that anonymous individual
+
+    Know: ∃ x P(x)
+    Assume? alias is our name for the individual
+        (could be any name we haven't used before)
+
+        Assume: P(alias)
+
+        Goal: reach a conclusion without using alias
+
+Example:
+    Know: ∃ x (P(x) ^ Q(x) -> R(x))
+    Assume? Suppose "alias" is the individual for which 
+    this is true.
+        Assume: P(alias) ^ Q(alias) -> R(alias)
+
+
+
 
 If we can reach a conclusion that does NOT use that alias
     ...we know that conclusion is valid, since
@@ -73,7 +92,8 @@ Syntax:
 
 
 --> Think of ExistsE like OrE
-    ∃ x P(x) means...?
+    ∃ x P(x) means...? P(k1) V P(k2) V ... V P(kn)
+    where k1...kn are the individuals in my domain
 
 
 Use ExistsE in the SAME situations you would use OrE
@@ -100,9 +120,11 @@ x is students
 
     --> what is this argument saying?
 
-∀ x (P(x) → ¬Q(x)): ?
+∀ x (P(x) → ¬Q(x)): 
+everyone who attends K-State doesn't attend KU
 
-¬(∃ x (P(x) ^ Q(x))): ?
+¬(∃ x (P(x) ^ Q(x))):
+there does not exist a student who attends both K-State and KU
 
 
 ////////////////////////////
@@ -116,21 +138,38 @@ Proof tactics for predicate logic
 - see if you can do anything right away with the premises
     Which rules? 
 
+        Have an AND? Use AndE1/AndE2
+        have an implies at the LHS? Use ImplyE
+        Have a for all and an individual? Use AllE
+
 - look at top-level operator for what you are trying to prove
     trying to prove a "for all" statement with ∀?
+
+        Use AllI
 
 
     trying to prove a "there exists" statement with ∃?
 
         do I have that statement about a particular individual?
+            ExistsI
 
         could I use AllE for an individual with an all statement?
+            sometimes
 
         do I have a "there exists" statement as a claim?
+            use ExistsE on the claim 
+                Assume the claim I already have is true for someone
+                try to end with my goal Exists statement 
+
 
         do I have an OR statement as a claim?
+            try OrE with subproofs, try to show
+            goal exists statement in both 
+
 
         really can't find anything? 
+            PbC
+
 
 
     trying to prove -> 
@@ -155,6 +194,9 @@ Proof tactics for predicate logic
 
 
     -->when you are in a subproof?
+        1) What rule are you using in the SubProof?
+        2) What you are trying to prove afterwards
+        3) Goal for the end of the subproof
 
 
     Unsure what to do?
@@ -163,6 +205,8 @@ Proof tactics for predicate logic
 ////////////////////////////////////////
 
 Proving DeMorgan's laws 
+
+(skipped, recommend for practice)
 
 //demorgan1.sc
 ∀ x ¬P(x)       equivalent to       ¬(∃ x P(x))
@@ -178,19 +222,21 @@ Soundness and completeness of predicate logic.
 
 
 Soundness: definition?
+every argument we prove is actually true
 
-    propositional:
+    propositional: yes!
 
-    predicate logic:
+    predicate logic: yes!
 
 
 
 
 Completeness: definition?
+we can prove all true arguments
 
-    propositional:
+    propositional: yes!
 
-    predicate logic:
+    predicate logic: no
 
 
 
@@ -205,10 +251,10 @@ Same argument might be VALID in one domain and INVALID in another
 Domain with integers with operations like +
 
 
-All integers? 2 + 3 = ?
+All integers? 2 + 3 = 5
 
 
-Subset (0,1,2,3,4) of integers. 2 + 3 = ?
+Subset (0,1,2,3,4) of integers. 2 + 3 = 0
 
 
 
