@@ -5,32 +5,10 @@ HW 7 due Tuesday, March 31
 Today: 
 - mathematical induction
 
+
+--> what makes a line of dominos all tip over?
+
 /////////////////////////////
-
-
-Example:
-
-We want to prove that for any positive integer n:
-
-    1 + 2 + ... + n = n*(n+1)/2
-
-
-(Carl Gauss)
-
-
-Try it out first.
-    n = 1?
-
-    n = 2?
-
-    n = 3?
-
-
-Have we proved it yet?
-
-
-
-///////////////////////////////////////////
 
 Mathematical induction.
 
@@ -46,25 +24,53 @@ The induction domino effect:
 
 
 What is this saying?
-    P(1)? 
+    P(1)? claim is true for the first one (n=1)
 
-    ∀ k (P(k) → P(k+1))? 
+    ∀ k (P(k) → P(k+1))? for all natural numbers k,
+        if P(k) holds, then P(k+1) holds
+
+        if my claim holds for some value of k, then I promise
+        it holds for the next value (k+1)
 
 
 
-Putting it all together:
+Putting it all together: ( P(1) ∧ ∀ k (P(k) → P(k+1)) ) → ∀ n P(n)
+
+IF it holds for the first AND it we know that for all numbers
+in the domain, if it holds for one then it will hold for the next
+THEN we know the claim holds for everything in our domain
 
 
 
 English translation?
 
 
-How will we prove P(1)?
+How will we prove P(1)? just plug in n=1 into our claim
+
 
 
 How will we prove ∀ k (P(k) → P(k+1))? 
     (How would we prove this for-all statements in predicate logic?)
 
+Use for all introduction
+    pick a random individual (k) in our domain 
+
+    assume P(k)
+
+
+    goal: try to prove P(k+1)
+
+    (this will prove P(k) → P(k+1) )
+
+
+//////////
+
+Pieces of mathematical induction:
+
+P(1): proving for the first one (the BASE CASE)
+
+∀ k (P(k) → P(k+1)): proving the INDUCTIVE STEP
+    the part where we assume P(k) is the INDUCTIVE HYPOTHESIS
 
 
 ////////////////////////////////////
@@ -73,18 +79,55 @@ Why are we doing this?
 
 ////////////////////////////////////
 
-Revisit our example:
+Example:
 
-We want to prove that for any positive integer n:
+We want to prove that for any natural number n:
 
     1 + 2 + ... + n = n*(n+1)/2
 
 
+(Carl Gauss)
 
+
+Try it out first.
+    n = 1?
+
+    n = 2?
+
+
+Have we proved it yet?
+
+
+1 + 2 + ... + n = n*(n+1)/2
 
 Proof by induction.
 
+Base case. We must prove the claim holds for the smallest
+value in our domain, n = 1. On left side we have 1 and on 
+the right side we have:
+    1*(1+1)/2 = 1
 
+The two sides are equal, so the base case holds.
+
+
+Inductive step. We assume the inductive hypothesis, that
+    1 + 2 + ... + k = k*(k+1)/2
+
+Where k is some natural number. We must prove the claim holds
+for k+1, so we must prove that:
+    1 + 2 + ... + k + (k+1) = (k+1)*((k+1)+1)/2
+
+We have that:
+    1 + 2 + ... + k + (k+1) = k(k+1)/2 + (k+1) (by inductive hypothesis)
+                            = (k(k+1) + 2(k+1))/2
+                            = ((k+1)(k+1))/2
+                            = (k+1)*((k+1)+1)/2
+
+Thus the claim holds for k+1, and so the inductive step holds.
+
+
+Summary: We have proved that 1 + 2 + ... + n = n*(n+1)/2 holds
+for all natural numbers n.
 
 /////////////////////////////////
 
@@ -95,20 +138,24 @@ Proof by induction.
 Do you think induction can be used to prove properties for
     ALL integers?
 
+NO. Need a smallest value.
 
 /////////////////////////////////
 
 Induction template.
 
-1) 
+1) Prove base case (prove true for smallest in our domain)
 
 
-2) 
+2) Inductive step. Assume the inductive hypothesis (that
+claim holds for some k in our domain). Prove claim holds for
+k+1.
 
-
-3) 
 
 /////////////////////////////////
+
+(skip, will do next Tuesday)
+
 
 Example: Prove that the sum of the first n odd numbers is n^2.
 
@@ -131,19 +178,45 @@ Proof by induction.
 Example: Prove that 3^n - 1 is even for all positive integers n.
 
 
-what does "even" mean? 
+what does "even" mean? divisible by 2.
+
+A number n is even if n = 2a where a is an integer.
+
+(But we will be more informal about even numbers in this proof.)
 
 
 
 Proof by induction.
 
+Base case. We must prove our claim for the smallest positive
+integer, n=1. We have 3^1 - 1 = 3 - 1 = 2, which is even. The
+base case hods.
 
+
+Inductive step. We assume the inductive hypothesis - that
+3^k - 1 is even for some positive integer k. We must show that
+3^(k+1) - 1 is even. We have that:
+    3^(k+1) - 1 = 3*(3^k) - 1
+                = 3*(3^k - 1) - 1 + 3
+                = 3*(3^k - 1) + 2
+
+Since 3^k - 1 is even by our inductive hypothesis, and since
+an even number times an integer is still even, we know that
+3*(3^k - 1) is even. Similarly, we know that 2 is even.
+The sum of two even numbers is still even, so 3*(3^k - 1) + 2
+is even. The inductive step holds.
+
+
+//////////////////////////////////
+
+<-- stopped here, will continue on Tuesday
 
 //////////////////////////////////
 
 Bad induction, example 1.
 
-Use induction to prove that in any nonempty set of n horses, all horses are the same color.
+Use induction to prove that in any nonempty set of n horses, 
+    all horses are the same color.
 
 
 //////////////////////////////////
