@@ -1,9 +1,13 @@
 HW 7 due tonight
+--> fonts fix
+
 
 #5, if n is a positive integer, then
     n^5 - n is divisible by 5
 
+5(some value here) + (some value you know is divisible by 5) + 5
 
+hint: expand it all out in the inductive step
 
 
 
@@ -14,26 +18,37 @@ HW 7 due tonight
 
 --> what would inductive hypothesis be?
 
+Assume that for some fixed natural number k:
+    1*1! + 2*2! + ... + k*k! = (k+1)! - 1
 
 
---> what would we be trying to prove?
+--> what would we be trying to prove? prove it for k+1
+    Want to prove:
+        1*1! + 2*2! + ... + k*k! + (k+1)(k+1)! = (k+2)! - 1
 
 
 
---> how can we express (n+1)!  ?
-    (n+2)!  ?
+
+
+--> how can we express (n+1)! = 1*2*3*...*n*(n+1)
+                                = n! * (n+1)
+    (n+2)!  = (n+1)! * (n+2)
 
 
 
 --> how can we rewrite  k*(k+1)! + (k+2)!   ?
+    hint: factor whatever you can
+
+k*(k+1)! + (k+2)! = k*(k+1)!  + (k+2)(k+1)!
+                = (k+1)!(k + k + 2)
 
 
 
 
 
-HW 8 will be posted after class
+HW 8 will be posted after class, due next Tuesday
 
-///////////////////////
+////////////////////////////////////////////
 
 Today:
 - Continue mathematical induction
@@ -42,28 +57,68 @@ Today:
 
 ////////////////////////////////////////////
 
+Induction domino effect (trying to prove P(n) for some domain)
+
 ( P(1) ∧ ∀ k (P(k) → P(k+1)) ) → ∀ n P(n) 
 
+P(1): base case, prove the statement is true for the smallest
+    element in our domain
 
+∀ k (P(k) → P(k+1)): inductive step  
+    Pick a random k in our domain
+    Assume P(k) (left side of implies): inductive hypothesis
+    Try to prove P(k+1)
 
 English translation?
 
-///////////////////////
+/////////////////////////////////
 
 Example: Prove that the sum of the first n odd numbers is n^2.
 
-    (what is our domain?)
+    (what is our domain?) natural numbers
+    n is HOW MANY things I am adding
 
 
-How can we express the sum of the first n odd numbers more formally?
+
+
+How can we write the sum of the first n odd numbers more formally?
+
+n = 1: 1
+n = 2: 1 + 3
+n = 3: 1 + 3 + 5
+n: 1 + 3 + 5 + ... + (whatever the nth odd number is)
+    1 + 3 + 5 + ... + (2n - 1)
 
 
 
-So, what is our claim?
+So, what is our claim? For all natural numbers n, 
+    1 + 3 + 5 + ... + (2n - 1) = n^2
 
 
 
 Proof by induction.
+
+Base case. We must prove our claim for the smallest natural number,
+n = 1. We have that 1 = 1^2, so the base case holds.
+
+Inductive step. We assume the inductive hypothesis, that for 
+some fixed natural number k:
+    1 + 3 + 5 + ... + (2k - 1) = k^2
+
+We must show that:
+    1 + 3 + 5 + ... + (2k - 1) + (2(k+1) - 1) = (k+1)^2
+
+We have that:
+    1 + 3 + 5 + ... + (2k - 1) + (2(k+1) - 1) =
+                                = k^2 + (2(k+1) - 1) (by inductive hypothesis)
+                                = k^2 + (2k + 2 - 1)
+                                = k^2 + 2k + 1
+                             .. = (k+1)^2
+
+The inductive step holds.
+
+
+Thus our claim holds for all natural numbers n.
 
 
 ////////////////////////////////
@@ -72,6 +127,21 @@ Bad induction, example 1.
 
 Use induction to prove that in any nonempty set of n horses, 
     all horses are the same color.
+
+Base case. Consider a set with 1 horse. All horses in the set
+have the same color because there is only 1 horse.
+
+Inductive step. We assume the inductive hypothesis - that
+for some natural number k, that a set of k horses all have the same
+color. Consider a set with k+1 horses. From our inductive hypothesis,
+the first k horses in that set have the same color, and the last
+k horses in that set have the same color. Those two subsets overlap,
+and so all k+1 horses must have the same color.
+
+(This fails because when k = 1 in the inductive step, and k+1
+is 2, the two size-k subsets do NOT overlap. This shows that we
+can "prove" things that make no sense if we make assumptions
+about our k in the inductive step.)
 
 
 //////////////////////////////////
@@ -83,6 +153,23 @@ Use induction to prove that 8n+3 is even for all positive integers n.
 
 (What happens when we skip the base case?)
 
+
+Inductive step. Assume the inductive hypothesis - that 8k+3 is even
+for some fixed positive integer k. We have that:
+    8(k+1) + 3 = 8k + 8 + 3 = (8k+3) + 8
+
+We have 8k+3 is even from our inductive hypothesis, and 8 is clearly
+even. The sum of two even numbers is also even, so 8(k+1) is even.
+
+
+Notice that we CAN prove the inductive step. However, if we try
+to prove the base case, we see that 8*1 + 3 = 11 is odd. (And
+thus we fail to establish the base case.)
+
+This shows that an induction proof is NOT complete unless we
+prove both the base case AND the inductive step, and that if
+we skip one of those parts then we can "prove" things that make
+no sense.
 
 ////////////////////////////////////
 
@@ -106,12 +193,16 @@ Recursive step: Give a rule for finding the value of the function
 
 Example (domain: all natural numbers, 1 and up):
 
+base case: f(1) = 3
+recursive case: f(n) = 2f(n-1) + 3, for n > 1
+
+
+What is f(3)? 
+    f(3) = 2f(2) + 3 = 2*9 + 3 = 21
+
+f(2) = 2f(1) + 3 = 2*3 + 3 = 9
+
 f(1) = 3
-f(n) = 2f(n-1) + 3, for n > 1
-
-
-What is f(3)?
-
 
 
 
@@ -126,14 +217,14 @@ g(n) = n * g(n-1), for n > 1
 
 n  | g(n)
 ---------
-1  | 
-2  | 
-3  | 
-4  | 
+1  | 1
+2  | 2*1 = 2
+3  | 3*2 = 6
+4  | 4*6 = 24
 
 
 
-
+factorial
 
 //////////////////////////////////
 
@@ -144,17 +235,24 @@ Write a recursive definition.
 Over natural numbers.
 
 Base case?
+    f(1) = 1
 Recursive case?
+    f(n) = ??? , for n > 1
 
 
 
 n | f(n)
 -----------------
-1 | 
-2 | 
-3 | 
-4 | 
+1 | 1
+2 | 2
+3 | 4
+4 | 7
+n | f(n-1) + (n-1)
 
+
+Full definition:
+f(1) = 1
+f(n) = f(n-1) + (n-1), for n > 1
 
 ////////////////////////////////
 
@@ -168,8 +266,13 @@ Base case: 1, 2 ∈ S
 Recursive case: x ∈ S ⋀ y ∈ S → xy ∈ S
 
 --> what are the elements in S?
+if I have two elements x and y in S, then their product is in S 
+
+S = {1, 2, 4, 8, 16, ...powers of 2}
 
 
+In set builder notation:
+    S = {x : x = 2^k, k ∈ Z, k >= 0}
 
 
 
@@ -177,6 +280,8 @@ Recursive case: x ∈ S ⋀ y ∈ S → xy ∈ S
 
 Write a recursive definition for the set S = {1, 3, 5, 7, ...}
 
+1 ∈ S
+x ∈ S → x + 2 ∈ S
 
 
 ////////////////////////////////
@@ -222,7 +327,10 @@ Direct (conditional) proof
 
 --> how would we do this with natural deduction?
 
+Assume P 
 
+... 
+try to get Q
 
 
 
@@ -237,8 +345,11 @@ Q
 
 
 
+////////////
 
-/////////////////////////////
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
+
+////////////
 
 Example: prove that the product of two even integers is even.
 
@@ -246,16 +357,26 @@ Example: prove that the product of two even integers is even.
 If our domain is integers and we have the predicate Even(x), how
 would you write this statement in predicate logic?
 
-
+∀ x ∀ y (Even(x) ⋀ Even(y) → Even(xy))
 
 
 
 What's the idea of proving this in predicate logic?
 
+Pick integers a and b.  Assume a and b are even. Try to prove
+ab is even.
 
 
 
 Direct proof:
+
+Let a and b be even integers. Since a is even, a = 2k for some integer
+k. Since b is even, b = 2m for some integer m. We have:
+    ab = (2k)(2m)
+        = 2(2km)
+
+Thus ab = 2j where j is the integer 2km, and thus ab is even.
+
 
 
 
@@ -263,7 +384,15 @@ Direct proof:
 
 --> How is our proof similar to natural deduction?
 
-////////////////////////////////
+////////////
+
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
+
+////////////
+
+<--- stopped here, will continue Thursday
+
+////////////
 
 Example.
 
