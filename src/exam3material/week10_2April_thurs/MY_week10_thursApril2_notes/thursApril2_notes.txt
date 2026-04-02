@@ -1,0 +1,229 @@
+HW 8 due Tuesday, April 7
+
+///////////////////////////
+
+Today:
+- more with direct proofs
+- contrapositive proofs
+- proofs by contradiction
+- proofs with sets
+
+/////////////////
+
+Example (review).
+
+The sum of two odd integers is even.
+
+
+
+////////////////////////////////
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
+/////////////////////////////////
+
+Proof by contrapositive
+
+--> Also for proving things of the form "If P, then Q"
+
+
+What is the contrapositive of P → Q?
+
+
+
+
+
+Proof by contrapositive template:
+
+
+
+
+
+
+
+//////////////////////////////////////////
+
+Example (contrapositive)
+
+If x^2 is odd for an integer x, then x is odd.
+
+Think of as P → Q
+    P: ? 
+    Q: ? 
+
+Contrapositive? 
+
+
+
+
+
+Try direct proof first.
+
+
+
+
+
+
+Now try contrapositive proof.
+
+
+
+
+--> best to indicate in proof that you are using contrapositive
+
+////////////////////////////////
+
+Mistakes in proofs.
+
+We want to "prove" that 1 = 2.
+
+
+"Proof:"
+Let a and b be two equal positive integers. We have that:
+
+    1) a = b                    (reason?) 
+
+    2) a^2 = ab                 (reason?) 
+
+    3) a^2 - b^2 = ab - b^2     (reason?)
+
+    4) (a-b)(a+b) = b(a-b)      (reason?) 
+
+    5) a+b = b                  (reason?)
+
+    6) 2b = b                   (reason?)              
+
+    7) 2 = 1                    (reason?) 
+
+
+
+//////////////////////////////////////
+
+Proof by contradiction.
+
+- same idea as PbC in natural deduction
+
+- assume that what you are trying to prove is not true
+
+- try to get a contradiction
+
+- conclude what you are trying to prove is true after all
+
+
+
+
+/////////////////////////
+
+Proof by contradiction template 1 (trying to prove P)
+
+
+Suppose, for the sake of contradiction, ¬P.
+...
+C ^ ¬C.
+
+We have a contradiction between C and ¬C, so P must hold.
+
+
+
+
+
+//////////////////////////
+
+Proof by contradiction template 2 (trying to prove If P, then Q):
+
+
+Assume P.
+Suppose, for the sake of contradiction, ¬Q.
+...
+C ^ ¬C.
+We have a contradiction between C and ¬C, so Q must hold.
+
+
+
+
+
+///////////////////////////
+
+Example (use proof by contradiction):
+
+If x^2 is even for an integer x, then x is even.
+
+(which template? )  
+
+
+
+
+//////////////////////////
+
+(in-class quiz)
+
+//////////////////////////
+
+Definitions: "rational" / "irrational"
+
+A number r is *rational* if r = p/q for some integers p and q,
+where q ≠ 0.
+
+
+
+Any number that is not rational is irrational,
+and any number that is not irrational is rational.
+
+//////////////////////////
+
+Example: use proof by contradiction to prove that sqrt(2)
+is irrational.
+
+(which template?  ) 
+
+
+/////////////////////////////////
+∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
+/////////////////////////////////
+
+Proofs with sets.
+
+Prove that A ⊆ B?
+    --> how would we express this in predicate logic?
+
+
+
+    --> proof template? 
+
+
+
+
+
+
+Prove that A = B?
+
+
+///////////////////////////////
+
+Example.
+
+Prove that {x : x = 4k + 2, k ∈ ℤ} ⊆ {x : x = 2a, a ∈ ℤ}
+
+A = {x : x = 4k + 2, k ∈ ℤ} 
+B = {x : x = 2a, a ∈ ℤ} 
+
+A: what elements?  
+
+
+B: what elements? 
+
+
+Proof that A ⊆ B.
+
+
+
+
+
+///////////////////////////////
+
+What if we wanted to prove something like:
+
+A ⋂ B = C?
+
+///////////////////////////////
+
+Next time: begin programming logic
+    (last major unit)
