@@ -14,7 +14,19 @@ Example (review).
 
 The sum of two odd integers is even.
 
+IF I have two odd integers x and y, THEN x+y is even
 
+Proof:
+Let x and y be odd integers. Since x is odd, x = 2k+1 for
+some integer k. Since y is odd, y = 2m+1 for some integer m.
+
+We have that:
+    x + y = (2k+1) + (2m+1)
+        = 2k + 2m + 2
+        = 2(k+m+1)
+
+Thus x+y = 2a where a is the integer k+m+1, and so
+x+y is even.
 
 ////////////////////////////////
 ∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
@@ -26,13 +38,16 @@ Proof by contrapositive
 
 
 What is the contrapositive of P → Q?
-
+    ¬Q → ¬P
 
 
 
 
 Proof by contrapositive template:
-
+    1) find the contrapositive
+    2) Assume ¬Q
+    ...
+    3) Goal: ¬P
 
 
 
@@ -46,24 +61,44 @@ Example (contrapositive)
 If x^2 is odd for an integer x, then x is odd.
 
 Think of as P → Q
-    P: ? 
-    Q: ? 
-
-Contrapositive? 
-
-
-
+    P: x^2 is odd for an integer x 
+    Q: x is odd
 
 
 Try direct proof first.
 
+Assume x^2 is odd for some integer x. If x^2 is odd, then
+x^2 = 2k + 1 for some integer k. 
+
+We have that:
+    x^2 = 2k + 1
+
+    (would need to take the sqrt, but then we wouldn't 
+    know if the result was even an integer)
+
+...goal: x is odd
 
 
 
 
+Original statement: 
+If x^2 is odd for an integer x, then x is odd.
+
+Contrapositive? 
+(The square of an even number is even)
+If some integer x is even, then x^2 is even
 
 Now try contrapositive proof.
+Let x be an even integer. Thus x = 2k for some integer k.
 
+Squaring both sides, we have:
+    x^2 = (2k)^2
+        = 4k^2
+        = 2(2k^2)
+
+Thus x^2 = 2a where a is the integer 2k^2, and so x^2 is even.
+
+(goal: x^2 is even)
 
 
 
@@ -79,20 +114,22 @@ We want to "prove" that 1 = 2.
 "Proof:"
 Let a and b be two equal positive integers. We have that:
 
-    1) a = b                    (reason?) 
+    1) a = b                    (reason?) premise
 
-    2) a^2 = ab                 (reason?) 
+    2) a^2 = ab                 (reason?) multiply both sides by a
 
-    3) a^2 - b^2 = ab - b^2     (reason?)
+    3) a^2 - b^2 = ab - b^2     (reason?) subtract b^2 from both sides
 
-    4) (a-b)(a+b) = b(a-b)      (reason?) 
+    4) (a-b)(a+b) = b(a-b)      (reason?) factor both sides
 
-    5) a+b = b                  (reason?)
+    5) a+b = b                  (reason?) divide both sides by a-b
 
-    6) 2b = b                   (reason?)              
+    6) 2b = b                   (reason?) plug b in for a, since a=b             
 
-    7) 2 = 1                    (reason?) 
+    7) 2 = 1                    (reason?) divide both sides by b
 
+Problem:
+Step 4 to 5, can't divide by a-b because a-b = 0.
 
 
 //////////////////////////////////////
@@ -146,7 +183,26 @@ Example (use proof by contradiction):
 
 If x^2 is even for an integer x, then x is even.
 
-(which template? )  
+(which template? ) 2
+
+Suppose x^2 is even for some integer x.
+Assume, for the sake of contradiction, that x is odd.
+If x is odd, then x = 2k+1 for some integer k. Furthermore,
+if x^2 is even, then x^2 = 2m for some integer m.
+
+Plugging in x = 2k+1, we have:
+    x^2 = (2k+1)^2
+        = 4k^2 +4k + 1
+        = 2(2k^2 + 2k) + 1
+
+Thus x^2 = 2a + 1 where is integer 2k^2 + 2k, which means that
+x^2 is odd. This contradicts with our previous assumption that
+x^2 is even.
+
+Thus x is even.
+
+(goal: contradiction)
+(goal: x is even)
 
 
 
@@ -172,8 +228,35 @@ and any number that is not irrational is rational.
 Example: use proof by contradiction to prove that sqrt(2)
 is irrational.
 
-(which template?  ) 
+(which template?  ) 1 (not an if-then)
 
+Suppose, for the sake of contradiction, that sqrt(2) is 
+rational. Thus sqrt(2) = p/q where p and q are integers and
+q != 0. We choose p and q such that p/q is fully reduced 
+and p and q share no common factors.
+
+Squaring both sides of sqrt(2) = p/q, we have:
+    2 = p^2/q^2
+
+Multiplying both sides by q^2, we gt:
+    2q^2 = p^2
+
+Thus p^2 = 2a where a is the integer q^2, and so p^2 is even.
+Thus p is also even by our previous proof (before the quiz).
+
+Since p is even, we have that p = 2b for some integer b.
+Plugging this in to our 2q^2 = p^2 equation, we have:
+
+    2q^2 = (2b)^2
+        = 4b^2
+
+Dividing both sides by 2, we get: q^2 = 2b^2. Thus q^2 = 2c
+where c is the integer b^2, and so q^2 is even. We have
+that q is also even by our previous proof.
+
+If p and q are both even, then p/q is not fully reduced.
+This contradicts with our assumption that it was reduced,
+and so sqrt(2) is irrational.
 
 /////////////////////////////////
 ∀ ∃     ∈ ∉     ∅ ⋂ ⋃ ⊂ ⊆   ⋀ ⋁ ¬ →     ℕ ℤ     ≠ ≤ ≥
@@ -183,17 +266,23 @@ Proofs with sets.
 
 Prove that A ⊆ B?
     --> how would we express this in predicate logic?
+⊆ is subset
 
+∀ x (x ∈ A → x ∈ B)
 
 
     --> proof template? 
+        pick a random individual
+        assume the individual is in A 
+        ...
+        prove the individual is in B
 
 
 
 
 
 
-Prove that A = B?
+Prove that A = B? Prove A ⊆ B and then prove B ⊆ A.
 
 
 ///////////////////////////////
@@ -205,13 +294,19 @@ Prove that {x : x = 4k + 2, k ∈ ℤ} ⊆ {x : x = 2a, a ∈ ℤ}
 A = {x : x = 4k + 2, k ∈ ℤ} 
 B = {x : x = 2a, a ∈ ℤ} 
 
-A: what elements?  
+A: what elements? all evens that are 2 more than multiple of 4
 
 
-B: what elements? 
+B: what elements? all evens
 
 
 Proof that A ⊆ B.
+
+Suppose x ∈ A. Thus x = 4k+2 where k is an integer. We have that
+x = 2(2k+1), and so x = 2a where is the integer 2k+1.
+
+Thus x ∈ B.
+
 
 
 
@@ -222,6 +317,24 @@ Proof that A ⊆ B.
 What if we wanted to prove something like:
 
 A ⋂ B = C?
+
+
+First prove A ⋂ B ⊆ C. 
+Suppose x ∈ A ⋂ B. Then x ∈ A and x ∈ B. 
+(The write out what x = to be in A using set builder
+and write out what x = to be in B).
+
+Get x = the format of the set builder for C, and conclude
+x ∈ C.
+
+
+Next prove that C ⊆ A ⋂ B.
+Suppose x ∈ C. Write the format x = (whatever it means to 
+be in C).
+
+Get x = the format of the set builder for A. Then get 
+x = the format of the set builder for B. Then conclude
+x ∈ A ⋂ B. 
 
 ///////////////////////////////
 
