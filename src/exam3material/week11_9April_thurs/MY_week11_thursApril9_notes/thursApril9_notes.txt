@@ -1,0 +1,277 @@
+HW 9 due Tuesday, April 14
+
+Any Logika issues?
+
+////////////////////////////
+
+Today:
+- Subst review
+- Processing variables that change
+- Processing conditional statements
+
+/////////////////////////////
+
+The Algebra* justification works for most mathematical manipulations
+
+Will not work on claims involving ∧, ∨, →, ∀, ∃
+
+
+
+Subst_<(m, n)  and Subst_>(m, n)
+
+
+m: line number with an equivalence, like:
+    LHS_M == RHS_M
+
+
+n: any statement
+
+
+
+< or > points at the value being REPLACED on line m
+
+
+Subst_<(m, n): replace each occurrence of LHS_M with RHS_M
+Subst_>(m, n): replace each occurrence of RHS_M with LHS_M
+
+
+//////////////////////////////
+
+Example:
+
+var x: Z = Z.prompt("Enter an integer: ")
+assume(x + 1 > 0 ∧ x + 1 < 10)
+
+var y: Z = x + 1
+
+Deduce(
+    1 ( x + 1 > 0 ∧ x + 1 < 10 ) by Premise,
+    2 ( y == x + 1 ) by Premise,
+
+    //how to plug in y?
+)
+
+//////////////////////////////
+
+Assignment with mutation
+
+
+var x: Z = 2
+
+//what could we put in a proof block here?
+
+
+
+
+x = x + 2       
+
+
+//what might we try to put in a proof block here?
+
+
+
+x = x + 4
+
+
+
+
+//////////////////////////////
+
+If you change the value of variable "name", write that claim
+using:
+
+    Old(name)
+
+in the very next proof block. Only ONE "Old" value exists
+at a time.
+
+
+The Old(name) refers to value of the variable just before
+the latest update.
+
+Goal: state that variable's current value WITHOUT using Old
+by the end of next proof block
+
+
+y = y + 4
+
+x = x + 3
+
+Deduce(
+    //what "Old" values are available?
+
+)
+
+//////////////////////
+
+Example (add3.sc):
+
+- get an input number
+- save out an "orig" value that is equal to the input
+
+add 1 to the input number
+add 2 to the input number
+
+want to assert that the resulting number is 3 more than the orig value
+
+
+
+--> what if we added an assume that the input number
+    was positive?
+
+--> could we add to our assert that the resulting number
+    is positive?
+
+//////////////////////////////////
+
+Note: programs with division
+
+the only number data type is Z, which is integer
+
+
+x / 7 - always integer division
+
+//what if x is 10
+test = x / 7
+
+Deduce(
+    1 ( test == x / 7 ) by Premise,
+    2 ( test*7 == x ) by Algebra*(1) //is this true?
+)
+
+
+
+have to say we're not dividing by 0:
+
+Deduce(
+    1 (7 != 0 ) by Algebra T
+)
+
+var test: Z = x / 7
+
+
+
+//////////////////////////////////
+
+(in-class quiz)
+
+//////////////////////////////////
+
+Verifying conditional statements.
+
+For now, we'll just look at if/else statements:
+
+
+if (condition) {
+
+} else {
+    //can put another if/else in here
+}
+
+
+/////////////////////////////////
+
+(maxOfTwo.sc)
+
+Example: max of two numbers
+
+
+...we still need to prove our assert
+
+
+/////////////////////////////////
+
+How to validate programs with conditionals.
+
+if (C) {
+
+} else {
+
+}
+
+assert(something)
+
+/////////////////////////////////
+
+Deduce(
+    1 ( P )
+)
+
+if (C) {
+    Deduce(
+        //what premises?  
+
+    )
+
+    statements
+
+    Deduce(
+        1 ( Q ) by Justification,
+        2 ( A ) by Justification
+    )
+
+} else {
+    Deduce(
+        //what premises? 
+        
+        
+    )
+
+    statements
+
+    Deduce(
+        1 ( Q ) by Justification,
+        2 ( B ) by Justification
+    )
+}
+
+Deduce(
+    //what premises?
+
+
+)
+
+/////////////////////////////
+
+Revisit the max example (maxOf2.sc)
+
+- what claims can we make in BOTH branches?
+- what claim will be different in the two branches?
+- finish the validation
+
+////////////////////////////////
+
+(abs.sc)
+
+Example: absolute value
+
+////////////////////////////////
+
+Next week:
+- Verifying programs with nested conditionals
+    (your last HW 9 problem is like this)
+- Verifying functions
+
+if (cond1) {
+    if (cond2) {
+        //know: ?
+    } else {
+        //know: ?
+    }
+    //Deduce block
+
+} else {
+    if (cond2) {
+        //know?
+    } else {
+        //know?
+    }
+    //Deduce block
+}
+
+Deduce block
+
+///////////////////////////////
+
+Next time:
+- verification with functions
