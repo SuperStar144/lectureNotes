@@ -13,14 +13,12 @@ var max: Z = 0
 
 if (a > b) {
   max = a
-<<<<<<< HEAD
   
   Deduce (
     1 ( a > b ) by Premise, //condition is true
     2 ( max == a ) by Premise, //from assignment
     3 ( max >= a ) by Algebra*(2),
     4 ( max >= b ) by Algebra*(1,3)
-=======
 
   Deduce(
     1 ( a > b ) by Premise, //condition is true
@@ -28,7 +26,6 @@ if (a > b) {
     3 ( max >= a ) by Algebra*(2),
     4 ( max >= b ) by Algebra*(1, 2)
 
->>>>>>> 2bb8534ac685dd77a89b44d6366f5ed5aa733f16
     //need: max >= a, max >= b
   )
 } else {
@@ -38,17 +35,17 @@ if (a > b) {
   Deduce (
 =======
   Deduce(
->>>>>>> 2bb8534ac685dd77a89b44d6366f5ed5aa733f16
+
     1 ( !(a > b) ) by Premise, //condition is not true
     2 ( max == b ) by Premise, //from assignment
     3 ( max >= b ) by Algebra*(2),
     4 ( a <= b ) by Algebra*(1),
-<<<<<<< HEAD
+
     5 ( max >= a ) by Algebra*(4,3)
-=======
+
     5 ( max >= a ) by Algebra*(3, 4)
 
->>>>>>> 2bb8534ac685dd77a89b44d6366f5ed5aa733f16
+
     //need: max >= a, max >= b
   )
 }
