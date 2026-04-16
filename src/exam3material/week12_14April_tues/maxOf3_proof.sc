@@ -43,7 +43,10 @@ if (a >= b) {
   Deduce(
     //FILL IN
     //what can we state as premises?
-
+    1 ( max >= a ) by Premise, //true in both branches
+    2 ( max >= b ) by Premise, //true in both branches
+    3 ( max >= c ) by Premise, //true in both branches
+    4 ( max == a | max == b | max == c ) by Premise, //true in both branches
   )
 } else {
   if (b >= c) {
@@ -56,7 +59,10 @@ if (a >= b) {
       3 (max == b) by Premise,
       4 (max >= a) by Algebra*(3, 1),
       5 (max >= b) by Algebra*(3),
-      6 (max >= c) by Algebra*(2, 3)
+      6 (max >= c) by Algebra*(2, 3),
+      7 ( max == a | max == b ) by OrI2(3),
+      8 ( max == a | max == b | max == c ) by OrI1(7)
+      //want: max == a | max == b | max == c
     )
   } else {
     max = c
@@ -69,11 +75,16 @@ if (a >= b) {
       4 (max >= a) by Algebra*(1, 2, 3),
       5 (max >= b) by Algebra*(2, 3),
       6 (max >= c) by Algebra*(3)
+      //need to build: max == a | max == b | max == c
     )
   }
   //summary block
   Deduce(
     //what goes here?
+     1 (max >= a) by Premise,
+    2 (max >= b) by Premise,
+    3 (max >= c) by Premise,
+    4 (max == a | max == b | max == c) by Premise
   )
 }
 

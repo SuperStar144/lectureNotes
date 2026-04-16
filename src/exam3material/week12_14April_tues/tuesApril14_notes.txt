@@ -1,12 +1,11 @@
 HW 9 due tonight
 
-    Algebra* justfication for Mac users
 
  
 HW 10 will be posted after class, due next Tues
 
 Exam 3 is Thursday, April 23
-    (more information will be posted this week)
+    (more information will be posted later this week)
 
 //////////////////////
 
@@ -47,6 +46,53 @@ Contract(
         postcondition
     )
 )
+
+
+////////////////////////////////
+
+def example(x: Z) : Z = {
+    Contract(
+        Requires( x > 0 ),
+        Ensures( Res[Z] > 1)
+    )
+
+    //2) list the preconditions as premises
+    //don't need a separate block, could claim directly in next block
+    Deduce(
+        1 ( x > 0 ) by Premise
+    )
+
+    val calc: Z = x + 1
+
+    //3) prove each postcondition about the returned value
+    Deduce(
+        1 ( calc == x + 1 ) by Premise, //from assignment
+        2 ( x > 0 ) by Premise, //precondition is recursive
+        3 ( calc > 1) by Algebra*(1,2) //proves postcondition
+        //need: calc > 1
+    ) 
+    return calc
+}
+
+val test: Z = 6
+//1) before calling a function, prove its preconditions
+//need: test > 0
+
+Deduce(
+    1 ( test == 6 ) by Premise, //from assignment
+    2 ( test > 0 ) by Algebra*(1)
+)   
+
+val result: Z = example(test)
+
+//4) claim the postconditions of example as premises
+Deduce(
+    1 ( result > 1 ) by Premise, //we are storing the return in result, 
+                                //so we plug "result" in for "Res[Z]"
+)
+assert(result > 1)
+
+/////////////////////////////////
 
 
 Requires/preconditions:
@@ -118,7 +164,7 @@ Four steps:
 
 Example: put our abs code in a function (absFn.sc)
 
-(will finish this example on Thursday)
+(we will finish that example on Thursday)
 
 /////////////////////////////////
 

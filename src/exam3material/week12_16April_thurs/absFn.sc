@@ -59,6 +59,8 @@ val x: Z = -4
 //what *should* the absolute value be?
 val calc: Z = absVal(x)
 
+//THURSDAY: finish from here
+
 // calc >= 0
 // calc == -1*x | calc == x
 
