@@ -3,7 +3,7 @@ HW 10 due Tuesday, April 21
 Exam 3 is Thursday, April 23
     - will post details by the end of the week
     - will review for the exam some on Tuesday, April 21
-    - Erik and Drake: review Wednesday, April 22 2:30-5:00 pm in DUE 1118
+    - Erik and Drake: review Wednesday, April 22 2:30-5:00 in DUE 1118
 
 //////////////////////////////
 
@@ -57,12 +57,23 @@ Example (mult_rec.sc):
 
 Validating loops.
 
-while (condition) {
-    statements
+val x: Z = 0
+val y: Z = 0
+while (x < n) {
+
+    Deduce (
+        1 ( x == 0 ) by Premise //NO! we don't know what iteration it is
+
+    )
+
+    x = x + 1
+    y = y + x
 }
 
+y == Old(y) + x //NO! I don't know what Old(y) is
 
-<-- what do we know here?
+
+<-- what do we know here? !(x < n)
 
 <-- why is this more challenging than if-statements?
 
@@ -74,8 +85,11 @@ Solution: kind of like mathematical induction
 Come up with a loop INVARIANT that summarizes the behavior
 in a loop
 
-- invariant should be true before loop begins
-- should be STILL true at the end of each iteration
+base case: invariant should be true before loop begins
+inductive step: should be STILL true at the end of each iteration
+    we assume the inductive hypothesis
+    here, we will assume our invariants hold at the BEGINNING of an iteration
+    need to prove it's still true at the end of that iteration
 
 
 Steps to proving correctness of a loop:
@@ -97,10 +111,11 @@ Steps to proving correctness of a loop:
 /////////////////////////
 
 When loop ends, you know two things:
-    1) About the invariant? 
+    1) About the invariant? true as a premise
+        (we will have proved it is true for ANY number of iterations)
 
 
-    2) About the loop condition? 
+    2) About the loop condition?  !(condition)
 
 
 
@@ -146,7 +161,9 @@ Example: see code for multiplication with repeated addition
 
 --> should the test cases/asserts be different?
 
+////////////////////
 
+(stopped here, will continue on Tuesday)
 
 --> what if the loop condition was "i < y" instead?
 

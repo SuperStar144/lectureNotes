@@ -11,7 +11,7 @@ def absVal(numOrig: Z) : Z = {
     //no preconditions
     Ensures(
       Res[Z] >= 0,
-      Res[Z] == -1*numOrig | Res[Z] == numOrig
+      Res[Z] == -1 * numOrig | Res[Z] == numOrig
     )
   )
 
@@ -26,7 +26,7 @@ def absVal(numOrig: Z) : Z = {
     2 ( Old(num) == numOrig ) by Premise, //assignment statement, num has changed
     3 ( num == Old(num) * -1 ) by Premise, //assignment statement, num has changed
     4 ( num >= 0 ) by Algebra*(1,3),
-    5 ( num == -1* numOrig ) by Algebra*(2,3)
+    5 ( num == -1 * numOrig ) by Algebra*(2,3)
   )
   } else {
     //do nothing -- num is already its own absolute value
@@ -42,7 +42,7 @@ def absVal(numOrig: Z) : Z = {
 
   Deduce(
     1 ( num >= 0 ) by Premise, //true in both branches
-    2 ( num == -1*numOrig | num == numOrig ) by Premise, //LHS true in if, RHS true in else
+    2 ( num == -1 * numOrig | num == numOrig ) by Premise, //LHS true in if, RHS true in else
     //need: num >= 0
     //need: num == -1*numOrig | num == numOrig
   )
@@ -59,10 +59,25 @@ val x: Z = -4
 //what *should* the absolute value be?
 val calc: Z = absVal(x)
 
-//THURSDAY: finish from here
+Deduce(
+  1 ( x == -4 ) by Premise,
+  2 ( calc >= 0 ) by Premise, //1st postcondition
+  3 ( calc == -1 * x | calc == x ) by Premise, //2nd postcondition
 
-// calc >= 0
-// calc == -1*x | calc == x
+  4 SubProof(
+    5 Assume ( calc == -1 * x ), //assume LHS of OR
+    6 ( calc == 4 ) by Algebra*(1, 5)
+  ),
+  7 SubProof(
+    8 Assume ( calc == x ), //assume RHS of OR
+
+    9 ( calc == -4 ) by Algebra*(1, 8),
+    10 ( F ) by Algebra*(2, 9),
+    11 ( calc == 4 ) by BottomE(10)
+  ),
+  12 ( calc == 4 ) by OrE(3,4,7)
+  //goal: calc == 4
+)
 
 //what should we be able to assert?
 assert(calc == 4)
