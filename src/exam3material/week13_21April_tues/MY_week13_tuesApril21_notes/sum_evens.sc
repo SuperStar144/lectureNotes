@@ -13,7 +13,7 @@ def sumEvens(n: Z): Z = {
       n > 0
     ),
     Ensures (
-      Res[Z] == n*(n+1)
+      //Res[Z] == n*(n+1)
     )
   )
 
@@ -34,7 +34,7 @@ def sumEvens(n: Z): Z = {
     //what about our loop invariant?
     Invariant (
       Modifies(cur, sum),
-      sum = cur*(cur+1)
+      //sum = cur*(cur+1)
     )
 
     //what can we list as premises?
@@ -43,6 +43,10 @@ def sumEvens(n: Z): Z = {
     //preconditions
 
     cur = cur + 1
+
+    //need a Deduce block to process how cur changed
+    //learn something about cur change that doesn't use "Old"
+
     sum = sum + 2*cur
 
     //NEED TO PROVE:
@@ -68,7 +72,7 @@ val num: Z = 5
 //premise: num == 5
 //must prove precondition for whatever expression is being passed in to the function
 
-var sum5evens: Z = sumEvens(num)
+//var sum5evens: Z = sumEvens(num)
 
 //use postcondition to prove the result
 //premises
@@ -76,4 +80,4 @@ var sum5evens: Z = sumEvens(num)
 //num == 5
 
 //sum of first 5 evens: ?
-assert(sum5evens == 30)
+//assert(sum5evens == 30)
