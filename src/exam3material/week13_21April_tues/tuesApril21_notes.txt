@@ -3,7 +3,8 @@ HW 10 due tonight
 
 Exam 3 is Thursday, April 23
 
-Erik and Drake have an Exam 3 review session Wednesday, April 22 from 2:30-5:00 pm in DUE 1118
+Erik and Drake have an Exam 3 review session 
+    Wednesday, April 22 from 2:30-5:00 pm in DUE 1118
 
 //////////////////////////////
 
@@ -53,7 +54,7 @@ Topics:
 - Predicate logic proofs emphasizing the existential quantifier
 - Recursive definitions (functions and sets)
 - Proof techniques, including:
-    - Mathematical induction
+    - **Mathematical induction
     - Direct (conditional) proofs
     - Contrapositive proofs 
     - Proof by contradiction
@@ -62,7 +63,7 @@ Topics:
 - Programming logic, including:
     - assumes and asserts
     - Subst and Algebra
-    - Verifying programs with:
+    - **Verifying programs with:
         - Variable assignments/expressions/updates
         - If/else statements
         - Functions (plus recursive functions and calling functions)
@@ -73,18 +74,29 @@ Topics:
 The exam will NOT involve programs that use modulus or division.
 
 
-Problems will be similar in format to Homework 7-10.
+Open-ended problems will be similar in format to Homework 7-10.
+Multiple choice similar to in-class quizzes and practice quizzes 
 
 
 When doing programming logic:
-    - use a proof block to process each variable update
-    - use exact assignment statements, previous claims,
-        conditions, etc. as premises (using "Old" for previous
-        value of variable that just changed)
-    - prove exactly the precondition(s) before any function call
-    - prove exactly the postcondition(s) before any function return
-    - prove loop invariants hold before the loop begins
-            and at end of each iteration
+    - when to have a proof block?
+        before a function call: prove precondition
+        before any assert: prove exactly the assert
+        when variables change - need proof block to use "Old" and process what happened
+        if/else - show something in if, show something in else
+            after if/else: can say as premise a claim proved in both branches
+                        A V B as premise (if A was proved in if and B in else)
+        before a function returns: prove the postcondition
+        prove any invariants before loop begins AND at end of each loop iteration
+
+    - rules with "Old"
+    - rules with conditionals
+    - before function returns?
+    - before loop begins?
+    - before end of loop iteration?
+    - before calling a function?
+    - after returning from a function?
 
 
-Now, we will work through practice exam 3
+
+Now, we will work through some of practice exam 3

@@ -23,14 +23,13 @@ def mult(x: Z, y: Z): Z = {
     1 ( total == 0 ) by Premise, //from assignment
     2 ( i == 0 ) by Premise, //from assignment
     3 ( total == x*i ) by Algebra*(1,2), //proves invariant before loop
-    4 ( y >= 0 ) by Premise, //precondition is true
-    5 ( i <= y ) by Algebra*(2, 4) //proves 2nd invariant before loop
-    //want: total == x*i
-  )
 
-  //should be able to assert both invariants before loop begins
-  assert(total == x*i)
-  assert(i <= y) 
+    4 ( y >= 0 ) by Premise, //from precondition
+    5 ( i <= y ) by Algebra*(2, 4) //proves 2nd invariant
+
+    //want: total == x*i
+    //want: i <= y
+  )
 
   while (i < y) {
     //what goes here?
@@ -63,23 +62,23 @@ def mult(x: Z, y: Z): Z = {
       3 ( total == x*(i-1) + x ) by Algebra*(1,2),
       4 ( total == x*i - x + x ) by Algebra*(3),
       5 ( total == x*i ) by Algebra*(4), //proves invariant at end of iteration
-      6 ( Old(i) < y ) by Premise, //loop condition is true
-      7 ( i <= y ) by Algebra*(1,6) //proves 2nd invariant
+    
+      6 ( Old(i) < y ) by Premise, //from loop condition
+      7 ( i <= y ) by Algebra*(1, 6) //proves 2nd invariant
     )
 
     //prove invariant(s) still true at the end of an iteration
     //want: total == x*i
+    //want: i <= y
 
     //what should we be able to assert here?
-    assert(total == x*i)
-    assert(i <= y)
   }
 
   //what do we need here?
   Deduce(
     1 ( !(i < y) ) by Premise, //condition is false
-    2 ( i <= y ) by Premise, //2nd invariant is true after loop
-    3 ( i >= y ) by Algebra*(1),
+    2 ( i >= y ) by Algebra*(1),
+    3 ( i <= y ) by Premise, //from 2nd invariant
     4 ( i == y ) by Algebra*(2,3),
     5 ( total == x*i ) by Premise, //invariants are true, we are at the end of an iteration
     6 ( total == x*y ) by Algebra*(4,5)
