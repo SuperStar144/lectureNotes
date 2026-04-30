@@ -30,7 +30,12 @@ HW 11 will be posted after class, due Tues May 5
 Today:
 
 - Logika modes
+
+auto mode: write function contracts, write loop invariant blocks
+
 - Verifying programs with sequences
+
+similar to a C# array
 
 
 Rest of semester:
@@ -87,7 +92,7 @@ Making claims about sequences.
 
 Suppose "seq" is our sequence
 
-
+k is the position, seq(k) is the value.
 
 ∀ (lower until upper)(k => some statement about seq(k) )
     (does NOT include upper)
@@ -96,8 +101,13 @@ Suppose "seq" is our sequence
 ∀ (0 until seq.size)(k => seq(k) == 0 )
     
     --> what does this say?
+        All elements in the sequence are 0.
 
 
+∀ (0 until seq.size)(k => k > 2 => seq(k) == 0 )
+    
+    --> what does this say?
+        All positions after 2 will be changed to 0.
 
 
 Similarly, can use ∃
@@ -105,14 +115,23 @@ Similarly, can use ∃
 ∃ (0 until seq.size)(k => seq(k) == 0 )
 
     --> what does this say?
+        There exists a position that has been changed to 0.
 
 ///////////////////////////
 
 Writing function contract for function with a sequence:
 
 - Requires?
+    These conditions must be met before function call (preconditions)
+    Need to add requirements to make sure program doesn't crash
+
 - Modifies?
+    State if a sequence parameter is changing (passed by reference)
+
 - Ensures?
+    What changes were made (including changes to a sequence parameter)
+        I need to describe what EVERY value in the sequence will be after calling the function
+    Describe what is being returned
 
 
 
@@ -120,7 +139,8 @@ Writing function contract for function with a sequence:
 
 --> In(seq)
 
-
+The value seq had AT THE BEGINNING of the funtion call
+    - similar to Old
 
 ///////////////////////////
 
