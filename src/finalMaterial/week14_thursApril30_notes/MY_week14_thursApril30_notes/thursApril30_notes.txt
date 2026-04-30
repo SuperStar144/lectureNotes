@@ -18,7 +18,12 @@ Example: swap function
 Functions with sequences and loops.
 --> same idea, but loop invariant block needs to:
 
-
+- "bound" the loop counter
+- state that the sequence size doesn't change (if we change the sequence)
+    something like: i >= 0, i < seq.size (upper bound will need to be slightly different)
+- specify what part of the sequence has already changed, and how it has changed 
+- specify what part of the sequence has NOT changed
+- if I am changing the sequence, put it in the modifies clause
 
 //////////////////////////
 
@@ -28,7 +33,7 @@ Example: function that sets every position in a sequence to 10
 
 //////////////////////////
 
---> what if instead setting everything to 10,
+--> what if instead of setting everything to 10,
     we added one to each element?
 
 //////////////////////////

@@ -9,11 +9,34 @@ import org.sireum._
 //can either write true or T, same with false
 def containsElem(nums: ZS, elem: Z): B = {
     //contract?
+    Contract (
+        //no requirements needed
+        //no modifications are being made
+        Ensures (
+            //if we return true, then there is a sequence element that matches elem
+            ( Res[B] == true ) __>: ( ∃(0 until nums.size)(k => nums(k) == elem) ),
+
+            //what about when we return false??
+            ( Res[B] == false ) __>: (∀ (0 until nums.size)(k => nums(k) != elem) ),
+        )
+    )
 
     var i: Z = 0
     var found: B = false
     while (i < nums.size) {
         //invariant?
+        Invariant (
+            Modifies(i, found),
+
+            //bound i 
+            i >= 0, i <= nums.size,
+            
+            //if we return true, then there is a sequence element that matches elem
+            ( found == true ) __>: ( ∃(0 until i)(k => nums(k) == elem) ),
+
+            //what about when we return false??
+            ( found == false ) __>: (∀ (0 until i)(k => nums(k) != elem) ),
+        )
 
         if (nums(i) == elem) {
             found = true
@@ -31,7 +54,9 @@ var testFound: B = containsElem(test, 0)
 
 //what should testFound be?
 
+assert(testFound == true)
 
 testFound = containsElem(test, 4)
 
 //what should testFound be?
+assert(testFound == false)
