@@ -1,0 +1,103 @@
+HW 11 due Tuesday, May 5
+
+Final exam is Monday, May 11 2:00-3:50 pm
+
+///////////////////////////
+
+Today:
+- more with sequence verification
+- begin working with global invariants
+
+////////////////////////////
+
+Example: swap function
+(swap.sc)
+
+///////////////////////////
+
+Functions with sequences and loops.
+--> same idea, but loop invariant block needs to:
+
+
+
+//////////////////////////
+
+Example: function that sets every position in a sequence to 10
+(seqAll10.sc)
+
+
+//////////////////////////
+
+--> what if instead setting everything to 10,
+    we added one to each element?
+
+//////////////////////////
+
+Example: seqMin.sc
+
+////////////////////////////
+
+new type: B (bool)
+
+Example: containsElem.sc
+
+/////////////////////////////
+
+(in-class quiz)
+
+/////////////////////////////
+
+Global variables and global invariants.
+
+- Multiple functions might modify the same global variables
+
+--> function postcondition needs to describe how the global variables change 
+    in the function (use "In")
+
+
+
+- Will add GLOBAL INVARIANTS specifying constraints about global variables
+
+--> global invariants  must be true initially
+
+--> the global invariants become both a precondition and a postcondition
+    for all functions
+
+
+
+
+What does this mean?
+
+
+/////////////////////////////////////
+
+Function contracts when considering global variables/invariants:
+    - Requires: what kind of parameters should we not allow?
+
+    - Modifies: list any global variables that are changed
+
+    - Ensures: describe impact of function on global variables
+        Use In(globalVariable) to reference global variable
+        value at beginning of function
+
+
+
+/////////////////////////////////////
+
+Bank example (bank.sc)
+
+Global variables:
+    - account balance
+    - "elite" status (a boolean for whether the balance is >= 1 million)
+
+Global invariants:
+    - balance should be non-negative
+    - elite status should reflect balance
+
+
+
+////////////////////////////////////
+
+Next time:
+- termination
+- specification in Java

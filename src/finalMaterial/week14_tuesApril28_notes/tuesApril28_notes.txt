@@ -1,13 +1,15 @@
 Exam 3 results.
 
-High: ??/100 
-Average: ??/100 
+Added 5 points to all scores
 
-A (90-100): ?? students
-B (80-89): ?? students
-C (70-79): ?? students
-D (60-69): ?? students
-F (below 60): ?? students 
+High: 104/100 (2 students) 
+Average: 70/100 (Canvas reports lower, but multiple students skipped exam) 
+
+A (90-100): 11 students
+B (80-89): 6 students
+C (70-79): 6 students
+D (60-69): 6 students
+F (below 60): 20 students (again, multiple students skipped exam)
 
 
 Final exam: Monday, May 11 2:00-3:50 pm
@@ -30,6 +32,9 @@ HW 11 will be posted after class, due Tues May 5
 Today:
 
 - Logika modes
+
+auto mode: write function contracts, write loop invariant blocks 
+
 - Verifying programs with sequences
 
 
@@ -93,9 +98,22 @@ Suppose "seq" is our sequence
     (does NOT include upper)
 
 
+
+
+
 ∀ (0 until seq.size)(k => seq(k) == 0 )
     
-    --> what does this say?
+    --> what does this say? all elements in the sequence are 0
+
+
+
+
+
+∀ (0 until seq.size)(k => k > 2 → seq(k) == 0 )
+    
+    --> what does this say? all positions after 2 will be changed to 0
+
+
 
 
 
@@ -104,15 +122,25 @@ Similarly, can use ∃
 
 ∃ (0 until seq.size)(k => seq(k) == 0 )
 
-    --> what does this say?
+    --> what does this say? there is a position that has been changed to 0
 
 ///////////////////////////
 
 Writing function contract for function with a sequence:
 
 - Requires?
+    these conditions must be met before function call (precondition)
+    need to add requirements to make sure program doesn't crash
+
 - Modifies?
+    state if a sequence parameter is changing 
+
 - Ensures?
+    what changes were made (including changes to a sequence parameter)
+        I need to describe what EVERY value in the sequence 
+            will be after calling the function
+
+    describe what is being returned
 
 
 
@@ -120,7 +148,8 @@ Writing function contract for function with a sequence:
 
 --> In(seq)
 
-
+the value seq had AT THE BEGINNING of the function call
+(like "Old")
 
 ///////////////////////////
 
@@ -134,8 +163,12 @@ in-class quiz
 
 ///////////////////////////
 
+<-- stopped here, will continue on Thursday
+
 Example: function that sets some position in a sequence to 0
 (seqZeroPos.sc)
+
+
 
 ///////////////////////////
 
