@@ -18,6 +18,12 @@ Example: swap function
 Functions with sequences and loops.
 --> same idea, but loop invariant block needs to:
 
+- "bound" the loop counter 
+    something like: i >= 0, i <= seq.size
+- state that the sequence size doesn't change (if we change the sequence)
+- specify what part of the sequence has already changed, and how
+- specify what part of the sequence has NOT changed
+- if I am changing the sequence, put it in the modifies clause 
 
 
 //////////////////////////
@@ -29,7 +35,7 @@ Example: function that sets every position in a sequence to 10
 //////////////////////////
 
 --> what if instead setting everything to 10,
-    we added one to each element?
+    we added ten to each element? (seqAllPlus10.sc)
 
 //////////////////////////
 
@@ -47,20 +53,25 @@ Example: containsElem.sc
 
 /////////////////////////////
 
+<-- stopped here, will continue on Tuesday
+
+//////////////////////////////
+
 Global variables and global invariants.
 
 - Multiple functions might modify the same global variables
 
---> function postcondition needs to describe how the global variables change 
-    in the function (use "In")
+--> function postcondition needs to describe how the global variables 
+    change in the function (use "In")
 
 
 
-- Will add GLOBAL INVARIANTS specifying constraints about global variables
+
+- GLOBAL INVARIANTS specify constraints about global variables
 
 --> global invariants  must be true initially
 
---> the global invariants become both a precondition and a postcondition
+--> global invariants become both a precondition and a postcondition
     for all functions
 
 

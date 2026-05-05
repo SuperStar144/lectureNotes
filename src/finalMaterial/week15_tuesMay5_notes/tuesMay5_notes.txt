@@ -1,0 +1,242 @@
+HW 11 due tonight
+
+Final exam: Monday, May 11 2:00-3:50 pm here (DUE 0093)
+    cumulative
+    a bit more emphasis on programming logic, content since exam 3
+    midterm equivalent in Canvas
+
+--> I'll post review material soon
+
+--> we'll spend some time Thursday reviewing
+
+//////////////////////////////
+
+Today:
+
+- global invariants
+- termination
+
+///////////////////////////////
+
+Global variables and global invariants.
+
+- Multiple functions might modify the same global variables
+
+
+
+- GLOBAL INVARIANTS specify constraints about global variables
+    --> global invariants  must be true initially
+
+    --> global invariants become both a precondition and a postcondition
+    for all functions
+
+    --> functions that modify global variables must:
+        - not allow parameters that could violate global invariants
+        - describe (as a postcondition) how global variables change
+
+
+
+
+Example in practice:
+
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String n) {
+        name = n;
+        age = 0;
+    }
+
+    public void setAge(int a) {
+        age = a;
+    }
+}
+
+--> good global invariant? (would it be true initially?)
+
+--> setAge precondition?
+
+--> setAge postcondition?
+
+
+/////////////////////////////////////
+
+Function contracts when considering global variables/invariants:
+    - Requires: what kind of parameters should we not allow?
+
+    - Modifies: list any global variables that are changed
+
+    - Ensures: describe impact of function on global variables
+        Use In(globalVariable) to reference global variable
+        value at beginning of function
+
+
+
+/////////////////////////////////////
+
+Bank example (bank.sc)
+
+Global variables:
+    - account balance
+    - "elite" status (a boolean for whether the balance is >= 1 million)
+
+Global invariants:
+    - balance should be non-negative
+    - elite status should reflect balance
+
+
+
+///////////////////////////////////
+
+Problem 3 on HW 11 (reverse sequence):
+
+
+def reverseSeq(seq: ZS): Unit = {
+  var i: Z = 0
+  while (i < seq.size/2) {
+  var temp: Z = seq(i)
+    seq(i) = seq(seq.size-i-1)
+    seq(seq.size-i-1) = temp
+    i = i + 1
+  }
+}
+
+
+
+///////////////////////////////////
+
+Problem 4 on HW 11 (sorted): model after containsElem
+
+can add a precondition about sequence size
+
+
+
+///////////////////////////////////
+
+Problem 6 on HW 11: Fan specification
+
+Fan speeds: 0-5
+Fan can be on (speeds 1-5) or off (speed 0)
+Fan can optionally rotate (but ONLY at speeds 3-5)
+
+Think of it as having two controls:
+    1) speed knob (becomes on when 1-5, off when 0)
+        --> can only change one speed level at a time
+
+    2) rotation lever
+
+--> since rotation is a DIFFERENT control, changing
+    speed can't change rotation
+
+
+Initially:
+    fan off
+    speed 0
+    rotate off
+
+Global invariants:
+    curSpeed >= 0,
+    curSpeed <= 5,
+    fanOn == true -> curSpeed > 0,
+    fanOn == false -> curSpeed == 0,
+    rotateOn == true -> curSpeed >= 3
+
+
+Functions:
+    setSpeed(speed: Z)
+    turnOn()
+    turnOff()
+    makeRotate()
+    stopRotate()
+
+
+
+    Fan on, speed 3, rotate on. Can we call setSpeed(2)?
+
+    Fan off, speed 0, rotate off. Can we call setSpeed(1)?
+
+    Fan on, speed 2, rotate off. Can we call setSpeed(0)?
+
+    Fan on, speed 3, rotate on. Can we call setSpeed(4)?
+
+    Fan on, speed 3, rotate on. Can we call makeRotate()?
+
+    Fan on, speed 5, rotate off. Can we call setSpeed(5)?
+
+    Fan on, speed 5, rotate off. Can we call setSpeed(6)?
+
+    Fan on, speed 1, rotate off. Can we call setSpeed(0)?
+
+
+
+setSpeed(speed: Z) preconditions?
+
+
+    postconditions?
+
+///////////////////////////
+
+In-class quiz
+
+///////////////////////////
+
+Termination - whether a program will finish on all inputs
+
+
+Partial Correctness:
+    IF the precondition is satisfied
+    THEN we guarantee the postcondition, but only IF 
+        the program terminates
+
+
+Total Correctness:
+    IF the precondition is satisfied
+    THEN we guarantee the postcondition AND termination
+
+
+We need to show termination to achieve total correctness
+
+
+
+////////////////////////////////////////
+
+Termination with a loop.
+    - create measure of how much work is left
+        (i.e., how many iterations are left)
+        --> should be a nonnegative integer
+
+    - show that the measure DECREASES with each iteration
+
+    - show that if there is no more work to do, then the loop
+        has finished
+
+    - see example
+
+
+
+Termination with recursion.
+    - can use induction
+    - see example
+
+
+
+Collatz function.
+
+
+
+////////////////////////////////////////
+
+Decidability - whether a problem can be decided one way or another
+
+Halting problem - given a computer program and a set of inputs
+    can you write another program to determine if the original
+    program will halt for the inputs?
+
+
+
+///////////////////////////
+
+Next time:
+- specification in Java
+- review for final exam
