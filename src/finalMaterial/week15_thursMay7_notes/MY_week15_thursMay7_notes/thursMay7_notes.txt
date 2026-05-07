@@ -1,0 +1,102 @@
+Today: 
+    - finish termination discussion
+    - function specifications in practice
+    - review for final exam
+
+
+///////////////////////////////////////
+
+Termination with recursion.
+    - can use induction
+    - see example
+
+
+////////////////////////////////////////
+
+Decidability - whether a problem can be decided one way or another
+
+Halting problem - given a computer program and a set of inputs
+    can you write another program to determine if the original
+    program will halt for the inputs?
+
+
+
+///////////////////////////
+
+- quick discussion of specifications in practice
+- review for final exam
+
+
+
+////////////////////////////////////
+
+
+What to do with preconditions and postconditions in practice?
+
+precondition violated?
+
+
+postcondition check?
+
+
+
+--> why might this would be preferable to only using test cases?
+
+
+
+See Java API
+
+/////////////////////////////
+
+Global invariants in practice.
+
+--> where should they hold?
+
+--> how to double-check?
+
+
+///////////////////////////////////////
+
+See Java Account example 
+
+//////////////////////////////////////
+
+Final exam: Monday, May 11 2:00-3:50 pm here (DUE 0093)
+    --> midterm equivalent in Canvas
+
+
+Office hour times during finals week.
+
+
+
+Closed notes, closed computers
+
+Cumulative. Similar format as previous exams.
+
+- recommend reviewing previous exams and practice exams
+- recommend reworking in-class and practice quizzes
+
+- final exam practice problems
+    --> these don't include all possible problem types
+    --> all topics include:
+        - all topics listed for Exam 1
+        - all topics listed for Exam 2
+        - all topics listed for Exam 3
+        - verifying programs with sequences
+        - verifying programs with global variables and global invariants
+        - termination
+
+
+(How to find list of topics from previous exams?)
+
+
+//////////////////////////////////
+
+Do **sequence (#9), **globals (#10), **loop/function program (#7) first
+
+
+<-- then in-class quiz
+
+
+
+Continue practice problems

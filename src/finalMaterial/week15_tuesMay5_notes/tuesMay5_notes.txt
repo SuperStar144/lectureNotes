@@ -5,11 +5,46 @@ Final exam: Monday, May 11 2:00-3:50 pm here (DUE 0093)
     a bit more emphasis on programming logic, content since exam 3
     midterm equivalent in Canvas
 
---> I'll post review material soon
+--> Canvas announcement linked to repo with practice problems
 
 --> we'll spend some time Thursday reviewing
 
 //////////////////////////////
+
+Problem 3 on HW 11 (reverse sequence):
+
+function contract postcondition:
+for all positions k, seq(k) == In(seq)(seq.size-k-1)
+
+loop invariant:
+size of seq doesn't change
+bound i (starts at 0, <= seq.size/2)
+1) which ones have changed at the beginning 
+    first i positions HAVE swapped (use the postcondition format)
+    last i positions HAVE swapped (use the postcondition format)
+    middle have NOT changed (from i to seq.size-i)
+
+
+def reverseSeq(seq: ZS): Unit = {
+  var i: Z = 0
+  while (i < seq.size/2) {
+  var temp: Z = seq(i)
+    seq(i) = seq(seq.size-i-1)
+    seq(seq.size-i-1) = temp
+    i = i + 1
+  }
+}
+
+
+
+///////////////////////////////////
+
+Problem 4 on HW 11 (sorted): model after containsElem
+
+can add a precondition about sequence size
+
+
+////////////////////////////////////
 
 Today:
 
@@ -22,6 +57,16 @@ Global variables and global invariants.
 
 - Multiple functions might modify the same global variables
 
+writing a class to represent a clock (time of day)
+    fields: hours, minutes, seconds, am/pm 
+
+    minutes should ALWAYS be between 0-59 (this is a global invariant)
+
+    //need to REQUIRE as a precondition that newMin be 0-59
+    //otherwise will violate global invariant
+    public void changeMinutes(int newMin) {
+        minutesField = newMin;
+    }
 
 
 - GLOBAL INVARIANTS specify constraints about global variables
@@ -86,32 +131,6 @@ Global invariants:
     - elite status should reflect balance
 
 
-
-///////////////////////////////////
-
-Problem 3 on HW 11 (reverse sequence):
-
-
-def reverseSeq(seq: ZS): Unit = {
-  var i: Z = 0
-  while (i < seq.size/2) {
-  var temp: Z = seq(i)
-    seq(i) = seq(seq.size-i-1)
-    seq(seq.size-i-1) = temp
-    i = i + 1
-  }
-}
-
-
-
-///////////////////////////////////
-
-Problem 4 on HW 11 (sorted): model after containsElem
-
-can add a precondition about sequence size
-
-
-
 ///////////////////////////////////
 
 Problem 6 on HW 11: Fan specification
@@ -153,27 +172,43 @@ Functions:
 
 
     Fan on, speed 3, rotate on. Can we call setSpeed(2)?
+        NO. This should not be allowed since the speed would be 2 while rotating.
+        need to require if speed parameter is < 3 then the fan is NOT rotating
 
     Fan off, speed 0, rotate off. Can we call setSpeed(1)?
+        yes
+        and the fan should be marked on
 
     Fan on, speed 2, rotate off. Can we call setSpeed(0)?
+        NO. can only change the speed by 1 in each direction.
 
     Fan on, speed 3, rotate on. Can we call setSpeed(4)?
+        yes
 
     Fan on, speed 3, rotate on. Can we call makeRotate()?
+        NO. Fan is already rotating.
 
     Fan on, speed 5, rotate off. Can we call setSpeed(5)?
+        NO. This wouldn't be a change.
 
     Fan on, speed 5, rotate off. Can we call setSpeed(6)?
+        NO. This would make the current speed 6 (and violate the   
+            global invariant)
 
     Fan on, speed 1, rotate off. Can we call setSpeed(0)?
+        yes.
+        and would be marked off.
 
 
 
 setSpeed(speed: Z) preconditions?
+    Require: speed parameter needs to be between 0-5
+        speed parameter should be 1 bigger or 1 smaller than current speed
+        if speed parameter < 3 then rotate needs to be off
 
 
     postconditions?
+        describe that the current speed changes to be that parameter speed
 
 ///////////////////////////
 
@@ -214,15 +249,17 @@ Termination with a loop.
     - see example
 
 
+Collatz function.
+
+////////////////////////////////////////
+
+(stopped here, will continue Thursday)
+
+///////////////////////////////////////
 
 Termination with recursion.
     - can use induction
     - see example
-
-
-
-Collatz function.
-
 
 
 ////////////////////////////////////////
