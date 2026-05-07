@@ -10,18 +10,19 @@ def diff(big: Z, small: Z): Z = {
     )
 
     //PREMISES:
-    big >= small
-
+    big >= small (precondition, can ALWAYS list as a premise)
 
     var count: Z = 0
     var cur: Z = big
 
     //PREMISES:
-
+    big >= small (precondition, can ALWAYS list as a premise)
+    count == 0
+    cur == big
 
 
     //SHOW:
-
+    count == (big-cur) (must prove ALL invariants before the loop begins)
 
 
     while (cur != small) {
@@ -31,23 +32,26 @@ def diff(big: Z, small: Z): Z = {
         )
 
         //PREMISES:
-
-
+        big >= small (precondition, can ALWAYS list as a premise)
+        count == (big-cur) (list ALL invariants as premise at beginning of iteration)
+        cur != small (loop condition is true)
 
         cur = cur - 1
         count = count + 1
 
         //SHOW:
-
+        count == (big-cur) (must prove ALL invariants still hold at end of iteration)
 
     }
 
     //PREMISES:
-
+    big >= small (precondition, can ALWAYS list as a premise)
+    count == (big-cur) (can list ALL invariants as premises after loop ends)
+    !(cur != small) (loop condition is false)
 
 
     //SHOW:
-
+    count == big-small (must prove ALL postconditions)
 
 
     return count
@@ -62,18 +66,18 @@ one == 10
 
 
 //SHOW:
-one+4 >= one
+one+4 >= one (must prove ALL preconditions based on what parameters being passed)
 
 var answer: Z = diff(one+4, one)
 
 
 
 //PREMISES:
-answer == (one+4)-one
+answer == (one+4)-one (list ALL postconditions as premises after function call using what we passed as parameters)
 one == 10
 
 
 //SHOW:
-answer == 4
+answer == 4 (prove exact assert statement)
 
 assert(answer == 4)

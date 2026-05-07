@@ -4,6 +4,9 @@ Today:
     - review for final exam
 
 
+Looking for an undergrad TA for CIS 301 in the fall to help with office hours.
+Email me if interested.
+
 ///////////////////////////////////////
 
 Termination with recursion.
@@ -13,25 +16,46 @@ Termination with recursion.
 
 ////////////////////////////////////////
 
-Decidability - whether a problem can be decided one way or another
-
 Halting problem - given a computer program and a set of inputs
-    can you write another program to determine if the original
-    program will halt for the inputs?
+    is it possible to write another program to determine if the original
+    program will halt (terminate) for the inputs?
 
 
+We will use PBC to prove that we CAN'T write such a program.
+
+Assume, for the sake of contradiction, that we CAN write a program
+to determine if another program will terminate on a set of inputs.
+ That is, assume we have:
+
+ def Halt(Function, Input):
+    if (Function(Input) halts) return true
+    else return false
+
+
+We also write:
+
+    def DoOpposite(Function):
+        if (Halt(Function, Function) return true): loop forever
+        else: return (i.e., halt) 
+
+
+Consider DoOpposite(DoOpposite). Two cases: 1) halts. 2) loops forever.
+
+Case 1. Suppose DoOpposite(DoOpposite) halts. That means 
+Halt(DoOpposite, DoOpposite) returned false. That meant DoOpposite(DoOpposite)
+did not halt. Contradiction.
+
+Case 2. Suppose DoOpposite(DoOpposite) loops forever. then
+Halt(DoOpposite, DoOpposite) returned true. Then DoOpposite(DoOpposite) halts.
+This is another contradiction.
+
+
+This means it is NOT possible to write a Halt program to determine if another
+program will terminate.
 
 ///////////////////////////
 
-- quick discussion of specifications in practice
-- review for final exam
-
-
-
-////////////////////////////////////
-
-
-What to do with preconditions and postconditions in practice?
+What to do with specifications in practice?
 
 precondition violated?
 
@@ -39,23 +63,14 @@ precondition violated?
 postcondition check?
 
 
+global invariants check?
+
+
 
 --> why might this would be preferable to only using test cases?
 
 
-
-See Java API
-
 /////////////////////////////
-
-Global invariants in practice.
-
---> where should they hold?
-
---> how to double-check?
-
-
-///////////////////////////////////////
 
 See Java Account example 
 
@@ -63,6 +78,11 @@ See Java Account example
 
 Final exam: Monday, May 11 2:00-3:50 pm here (DUE 0093)
     --> midterm equivalent in Canvas
+
+
+Erik and Drake final exam review session: 
+    Friday, May 8 10:00 am - 12:30 pm in DUE 1118
+
 
 
 Office hour times during finals week.
@@ -92,11 +112,15 @@ Cumulative. Similar format as previous exams.
 
 //////////////////////////////////
 
-Do **sequence (#9), **globals (#10), **loop/function program (#7) first
-
-
 <-- then in-class quiz
 
 
+Do **sequence (#9), **globals (#10)
+
+
+
+
+//////////////////////////////////
 
 Continue practice problems
+(starting with loop/function program (#7) )

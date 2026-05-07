@@ -36,6 +36,11 @@ public class Account {
     public void deposit(int amount) {
         //what do we do here?
 
+        //if my precondition is violated
+        if (amount < 0) {
+            throw new Exception("amount should be positive");
+        }
+
         int oldBalance = _balance;
         _balance += amount;
 
@@ -44,6 +49,12 @@ public class Account {
         }
 
         //what do we do here?
+        
+        //assert whatever our postcondition is
+        assert _balance == oldBalance + amount;
+
+        //assert our global invariants
+        globalAsserts();
     }
 
     /*@

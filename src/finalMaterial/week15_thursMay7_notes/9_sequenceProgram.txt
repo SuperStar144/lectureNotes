@@ -4,16 +4,50 @@ program (including the assert at the bottom) would be verified in Logika's auto 
 def addToNeg(a: ZS, pos: Z): Unit = {
     Contract(
         //COMPLETE THE FUNCTION CONTRACT
-        
+        Requires( pos >= 0, pos < a.size ),
+        Modifies(a),
+        Ensures (
+            //describe what happens to ALL positions in the sequence
 
+            //from 0 to pos does not change
+            All(0 until pos) (k => (a(k) == In(a)(k))),
+
+            //from pos to end, don't change if they aren't negative
+            All(pos until a.size) (k => (In(a)(k) >= 0 -> a(k) == In(a)(k))),
+
+            //from pos to end, add one if they ARE negative
+            All(pos until a.size) (k => (In(a)(k) < 0 -> a(k) == In(a)(k) + 1)),
+
+            //if returning something, describe what is being returned
+            //(not relevant here)
+        )
     )
     var i: Z = pos
 
     while (i < a.size) {
         Invariant(
             //COMPLETE THE LOOP INVARIANT BLOCK
+            Modifies(i, a),
+
+            //bound the loop counter
+            i >= pos, i <= a.size
             
-            
+            //size doesn't change
+            a.size == In(a).size,
+
+            //what parts of the sequence have already changed
+            All(pos until i) (k => (In(a)(k) < 0 -> a(k) == In(a)(k) + 1))
+
+            //what parts have not changed
+
+            //I haven't changed anything after position i
+            All(i until a.size) (k => (a(k) == In(a)(k))),
+
+            //from pos until i, I didn't change anything nonnegative
+            All(pos until i) (k => (In(a)(k) >= 0 -> a(k) == In(a)(k)))
+
+            //from 0 to pos does not change
+            All(0 until pos) (k => (a(k) == In(a)(k)))
         )
 
         if (a(i) < 0) {
